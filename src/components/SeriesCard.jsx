@@ -1,23 +1,23 @@
-// File: SeriesCard.jsx
-// ✅ This is a reusable component that receives props from the parent
-
-export const SeriesCard = (props) => {
-  // props.curElem contains one object of the seriesData array
+// export const SeriesCard = (props) => {
+export const SeriesCard = ({data}) => {
+  // props.data contains one object of the seriesData array
+  // const { img_url,name, rating, description, cast, genre, watch_url} = props.data;
+  const { img_url,name, rating, description, cast, genre, watch_url} = data;
   return (
     <li>
       <div>
         <img
-          src={props.curElem.img_url}
+          src={img_url}
           width="40%"
           height="40%"
         />
       </div>
-      <h2>Name: {props.curElem.name}</h2>
-      <h3>Rating: {props.curElem.rating}</h3>
-      <p>Summary: {props.curElem.description}</p>
-      <p>Cast: {props.curElem.cast}</p>
-      <p>Genre: {props.curElem.genre}</p>
-      <a href={props.curElem.watch_url} target="_blank">
+      <h2>Name: {name}</h2>
+      <h3>Rating: {rating}</h3>
+      <p>Summary: {description}</p>
+      <p>Cast: {cast}</p>
+      <p>Genre: {genre}</p>
+      <a href={watch_url} target="_blank">
         <button>Watch Now</button>
       </a>
     </li>
