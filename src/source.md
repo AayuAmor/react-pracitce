@@ -135,4 +135,34 @@ export const App = () =>{
 
 }
 
-#############################################33
+############################################# Leture Props ############################################
+
+## 🧠 React Props – Quick Summary
+
+- `props` are used to pass data from a **parent component** to a **child component**.
+- In our project:
+  - `<SeriesCard />` receives data using `props.curElem`.
+  - `seriesData.map()` is used to loop through the list.
+  - Each child gets its own data object via `props`.
+
+### ✅ Benefits:
+- Reusable component (`SeriesCard`)
+- Clean, modular structure
+- Makes dynamic rendering easy
+
+### 📌 Key Takeaways:
+- Always pass `key={uniqueId}` while mapping
+- Use `props` to access and display data
+- Components become more dynamic and scalable
+
+### 🔁 Syntax Recap:
+
+```jsx
+<ChildComponent someProp={value} />
+
+// In child
+const ChildComponent = (props) => {
+  console.log(props.someProp);
+}
+
+
