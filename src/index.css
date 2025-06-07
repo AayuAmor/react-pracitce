@@ -1,3 +1,5 @@
+/* This file conatains global css styles that apply to the entire application. It allows you to define styles that should be applied globally, affecting all componenets within the app */
+
 *{
   margin: 0;
   padding: 0;
