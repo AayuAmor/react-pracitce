@@ -7,6 +7,6 @@ export const NetflixSeries = () => {
       {seriesData.map((curElem) => (
         <SeriesCard key={curElem.id} data={curElem} />
       ))}
-    </ul>
+    </ul> 
   );
 };
