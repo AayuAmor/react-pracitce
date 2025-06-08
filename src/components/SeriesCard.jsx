@@ -9,6 +9,7 @@ export const SeriesCard = ({data}) => {
           color:"var(--bg-color)",
         
   }
+  const rating_condition = rating >= 8.5 ? "superhit" : "average";
   return (
     <li className="card">
       
@@ -23,7 +24,11 @@ export const SeriesCard = ({data}) => {
       <h2>Name: {name}</h2>
       <h3 style={{fontSize:"18px"}}>Rating:
         {""}
-        <span className={`rating ${ rating >= 8.5 ? "superhit" : "average"}`}>  {/* This is conditional styling */}
+
+        {/* <span className={`rating ${ rating >= 8.5 ? "superhit" : "average"}`}>  This is conditional stylingNow with Template Linerals `` which allows multiple className */}
+
+         <span className={`rating ${ rating_condition}`}>  {/* Passing  variable for conditional styling*/}
+
         {""} 
         {rating}
         </span>
