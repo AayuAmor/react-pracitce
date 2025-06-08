@@ -17,3 +17,10 @@ img{
     flex-direction:column ;
     gap: 1.2rem;
 }
+
+.average{
+    background-color: yellow;
+}
+.superhit{
+    background-color: #51de51;
+}
