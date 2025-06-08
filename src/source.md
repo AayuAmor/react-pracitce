@@ -200,3 +200,60 @@ const ProfileCard = ({ name, age, greeting, children }) => {
 | Props                | Data from parent to child                         |
 | Destructuring        | Cleaner code with `({ prop })`                   |
 | `props.children`     | Access nested JSX passed to component             |
+
+
+## 🎨 Inline Styling in SeriesCard
+This component uses inline styling for certain UI elements.
+
+## 📌 Button Styling
+The Watch Now button uses an inline style object defined as:
+
+```jsx
+Copy
+Edit
+const btn_style = {
+  padding: "1.2rem 2.4rem",
+  border: "none",
+  fontSize: "1.6rem",
+  backgroundColor: "var(--btn-hover-bg-color)",
+  color: "var(--bg-color)",
+};
+```
+
+## This is applied to the button like so:
+
+```jsx
+Copy
+Edit
+<button style={btn_style}>Watch Now</button>
+```
+## 📌 Heading Styling
+A heading also uses inline styles:
+
+```jsx
+Copy
+Edit
+<h3 style={{ fontSize: "18px" }}>Rating: {rating}</h3>
+```
+## ✅ Why Use Inline Styles?
+Scoped: Styles are isolated to the component.
+
+Quick: Easy for one-off styling needs.
+
+Dynamic: Can be modified based on props or state.
+
+## ⚠️ Limitations
+No support for pseudo-classes like :hover or media queries.
+
+Not ideal for large, consistent design systems.
+
+## 🖼️ Rendered Output Includes:
+A card with:
+
+- Thumbnail image (img_url)
+
+- Title (name)
+
+- Rating, Description, Cast, and Genre
+
+- External link button (Watch Now)
