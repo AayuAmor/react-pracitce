@@ -1,5 +1,5 @@
 
-# ✅ React JSX & Props Notes
+# ✅ `React JSX` & `Props` Notes
 
 ## ❌ Not Rendered in DOM
 React does **not** render the following values:
@@ -111,7 +111,7 @@ export const App = () => {
 
 ---
 
-## 📮 Props Summary
+## 📮 `Props` Summary
 
 Props allow **parent components** to pass data to **child components**.
 
@@ -201,8 +201,9 @@ const ProfileCard = ({ name, age, greeting, children }) => {
 | Destructuring        | Cleaner code with `({ prop })`                   |
 | `props.children`     | Access nested JSX passed to component             |
 
+<br><br>
 
-## 🎨 Inline Styling in SeriesCard
+# 🎨 `Inline Styling` in SeriesCard
 This component uses inline styling for certain UI elements.
 
 ## 📌 Button Styling
@@ -257,3 +258,60 @@ A card with:
 - Rating, Description, Cast, and Genre
 
 - External link button (Watch Now)
+
+<hr>
+<br>
+
+
+## 🎯 `Conditional Styling` with JSX – SeriesCard Component
+✅ Objective
+Apply different styles based on rating using template literals and a variable-based approach to keep JSX clean and readable.
+
+## 📦 Updated Code Snippet
+```jsx
+
+export const SeriesCard = ({ data }) => {
+  const { img_url, name, rating, description, cast, genre, watch_url } = data;
+
+  const btn_style = {
+    padding: "1.2rem 2.4rem",
+    border: "none",
+    fontSize: "1.6rem",
+    backgroundColor: "var(--btn-hover-bg-color)",
+    color: "var(--bg-color)",
+  };
+
+  // ✅ Conditional class name based on rating
+  const rating_condition = rating >= 8.5 ? "superhit" : "average";
+
+  return (
+    <li className="card">
+      <div>
+        <img src={img_url} width="40%" height="40%" />
+      </div>
+      <div className="card-content">
+        <h2>Name: {name}</h2>
+        <h3 style={{ fontSize: "18px" }}>
+          Rating:
+          <span className={`rating ${rating_condition}`}>
+            {rating}
+          </span>
+        </h3>
+        <p>Summary: {description}</p>
+        <p>Cast: {cast}</p>
+        <p>Genre: {genre}</p>
+        <a href={watch_url} target="_blank">
+          <button style={btn_style}>Watch Now</button>
+        </a>
+      </div>
+    </li>
+  );
+};
+```
+## 🧠 Key Concepts
+Feature	Description 
+- rating_condition	Stores the class name based on rating (ternary logic)
+
+- className={rating ${rating_condition}}	Uses template literals to dynamically assign class
+
+- Benefits	Clean JSX, easy to style via CSS (.superhit or .average)
