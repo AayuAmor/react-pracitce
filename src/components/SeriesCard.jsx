@@ -23,7 +23,7 @@ export const SeriesCard = ({data}) => {
       <h2>Name: {name}</h2>
       <h3 style={{fontSize:"18px"}}>Rating:
         {""}
-        <span className={ rating >= 8.5 ? "superhit" : "average"}>  {/* This is conditional styling */}
+        <span className={`rating ${ rating >= 8.5 ? "superhit" : "average"}`}>  {/* This is conditional styling */}
         {""} 
         {rating}
         </span>
