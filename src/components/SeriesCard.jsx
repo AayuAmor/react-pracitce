@@ -4,9 +4,11 @@ export const SeriesCard = ({data}) => {
     
           padding:"1.2rem 2.4rem",
           border:"none",
+          borderRadius: "100rem",
           fontSize:"1.6rem",
-          backgroundColor:"var(--btn-hover-bg-color)",
-          color:"var(--bg-color)",
+          backgroundColor:`${rating >= 8.5 ? "#51de51" : "#ffff00" }`,
+          color:"#0a0a0a",
+      
         
   }
   const rating_condition = rating >= 8.5 ? "superhit" : "average";
@@ -41,7 +43,7 @@ export const SeriesCard = ({data}) => {
         <button 
         style={btn_style}
         >
-          Watch Now
+          <b>Watch Now</b>
           </button>
       </a>
       </div>
