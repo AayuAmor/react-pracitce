@@ -1,15 +1,52 @@
 ---
 
+## ⚡ React Event Handling
+
+### 🎯 What is Event Handling in React?
+
+Event handling lets you respond to user actions (like clicks, typing, etc.) using handler functions. You attach these handlers to JSX elements using props like `onClick`, `onChange`, etc.
+
+### 🚀 Example: Button Click Event
+
+```jsx
+export const EventHandling = () => {
+  const handleButtonClick = (beti) => {
+    alert(`Hey I am ${beti} OnClick Event`);
+  };
+
+  return (
+    <>
+      {/* <button onClick={handleButtonClick}>Click Me!</button> */}
+      <button onClick={() => handleButtonClick("horney")}>Click Me!</button>
+    </>
+  );
+};
+```
+
+### 🧠 Key Points
+
+- Use camelCase for event props: `onClick`, `onChange`, etc.
+- Pass a function reference or an inline arrow function.
+- You can pass arguments to handlers using arrow functions.
+
+### 💡 Pro Tips
+
+- Use event handlers to update state, show alerts, or trigger any logic.
+- You can reuse handler functions for multiple elements.
+---
+
 ## 🔗 Tailwind CSS Documentation
 
 For quick reference to all Tailwind utility classes, visit:
 
 [Tailwind CSS Docs](https://tailwindcss.com/docs/)
+
 # ✅ `React JSX` Notes
 
 ## ❌ Not Rendered in DOM
 
 React does **not** render the following values:
+
 - `null`
 - `NaN`
 
@@ -713,6 +750,44 @@ Tailwind CSS is a utility-first CSS framework for rapidly building custom user i
 
 ---
 
+---
+
+## ⚡ React Event Handling
+
+### 🎯 What is Event Handling in React?
+
+Event handling in React lets you respond to user actions (like clicks, typing, etc.) using functions called event handlers. You attach these handlers to JSX elements using props like `onClick`, `onChange`, etc.
+
+### 🚀 Example: Button Click Event
+
+```jsx
+export const EventHandling = () => {
+  const handleButtonClick = (beti) => {
+    alert(`Hey I am ${beti} OnClick Event`);
+  };
+
+  return (
+    <>
+      {/* <button onClick={handleButtonClick}>Click Me!</button> */}
+      <button onClick={() => handleButtonClick("horney")}>Click Me!</button>
+    </>
+  );
+};
+```
+
+### 🧠 Key Points
+
+- Use camelCase for event props: `onClick`, `onChange`, etc.
+- Pass a function reference or an inline arrow function.
+- You can pass arguments to handlers using arrow functions.
+
+### 💡 Pro Tips
+
+- Use event handlers to update state, show alerts, or trigger any logic.
+- You can reuse handler functions for multiple elements.
+
+---
+
 ## 🧠 Key Concepts (Overall)
 
 - JSX skips rendering `false`, `null`, `undefined`, `NaN`
@@ -727,3 +802,4 @@ Tailwind CSS is a utility-first CSS framework for rapidly building custom user i
 - useState for state in functional components
 - styled-components for dynamic, prop-based styling
 - Tailwind CSS for utility-first styling
+- Event handling for interactive UI
