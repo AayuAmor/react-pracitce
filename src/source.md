@@ -1,4 +1,4 @@
-# ✅ `React JSX` & `Props` Notes
+# ✅ `React JSX` Notes
 
 ## ❌ Not Rendered in DOM
 
@@ -205,23 +205,49 @@ const watch = () => (age >= 18 ? "Watch Now" : "Not Available");
 
 ## 🎥 NetflixSeries Component
 
-### 📦 Import/Export Patterns
 
-#### **Default Export vs Named Export**
+## 🧩 CSS Modules in React
 
-- **Default Export**: Main component, imported without `{}`
-- **Named Export**: Additional components, imported with `{}`
+### 🎯 What Are CSS Modules?
 
+CSS Modules are a way to write CSS that is scoped to a specific component, preventing style conflicts and making your styles more maintainable.
+
+### 🚀 Key Features
+
+- **Locally scoped**: Class names are unique to the file/component.
+- **No global pollution**: Styles do not leak to other components.
+- **Easy to use**: Import as an object and reference classes as properties.
+
+---
+
+### 📦 Usage Example
+
+#### 1. Create a CSS Module file
+
+`Netflix.module.css`
+
+```css
+.card {
 ### `NetflixSeries.jsx`
 
 ```jsx
 const NetflixSeries = () => {
   const name = "Solo Leveling";
+.superhit {
   const rating = "9.5";
   const summary = `In a world where gates connect Earth...`;
   const age = 21;
+.average {
 
   const returnGenre = () => "Adventure, Action-Drama";
+```
+
+#### 2. Import and Use in Component
+
+```jsx
+import styles from "./Netflix.module.css";
+
+export const SeriesCard = ({ data }) => {
 
   const watch = () => (age >= 18 ? "Watch Now" : "Not Available");
 
@@ -231,6 +257,43 @@ const NetflixSeries = () => {
         <img src="image.png" alt="poster" width="40%" height="40%" />
         <h2>Name: {name}</h2>
         <h3>Rating: {rating}</h3>
+```
+
+---
+
+### 🧠 How It Works
+
+- **Import**: `import styles from "./Netflix.module.css";`
+- **Usage**: `className={styles.card}` or `className={styles.superhit}`
+- **Result**: Class names are transformed to unique values (e.g., `card_xyz123`)
+
+---
+
+### 💡 Pro Tips
+
+| Tip | Description |
+|-----|-------------|
+| Use camelCase | For multi-word class names, use camelCase in CSS and JS |
+| Dynamic classes | Use ternary or template literals for conditional styling |
+| No global styles | Avoid using global selectors in module files |
+
+---
+
+### 📝 Example: Conditional Styling with CSS Modules
+
+```jsx
+<span className={`${styles.rating} ${rating >= 8.5 ? styles.superhit : styles.average}`}>{rating}</span>
+```
+
+---
+
+## 🧠 Recap: Why CSS Modules?
+
+- Prevents style conflicts
+- Makes components portable
+- Encourages modular design
+
+---
         <p>Summary: {summary}</p>
         <p>Genre: {returnGenre()}</p>
         <button>{watch()}</button>
@@ -542,12 +605,52 @@ export const SeriesCard = ({ data }) => {
 };
 ```
 
-## 🧠 Key Concepts
 
-Feature Description
+---
 
-- rating_condition Stores the class name based on rating (ternary logic)
+## ⚡ React useState Hook
 
-- className={rating ${rating_condition}} Uses template literals to dynamically assign class
+### 🎯 What is useState?
 
-- Benefits Clean JSX, easy to style via CSS (.superhit or .average)
+`useState` is a React Hook that lets you add state to functional components. State is data that can change over time and cause your component to re-render.
+
+### 🚀 Basic Usage
+
+```jsx
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0); // Initial value is 0
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+### 🧠 How It Works
+
+- `useState(0)` returns an array: `[currentValue, updateFunction]`
+- `count` is the current value
+- `setCount` is the function to update the value
+
+### 💡 Pro Tips
+
+- You can use any data type (number, string, array, object)
+- Calling the update function re-renders the component
+
+---
+
+## 🧠 Key Concepts (Overall)
+
+- JSX skips rendering `false`, `null`, `undefined`, `NaN`
+- Fragments group elements: `<></>` or `<Fragment>`
+- Conditional rendering: ternary, variable, or function
+- Props: parent-to-child data
+- Destructuring props for cleaner code
+- `props.children` for nested JSX
+- Inline styling for quick, scoped styles
+- Template literals for dynamic classes/styles
+- CSS Modules for locally scoped styles
+- useState for state in functional components
