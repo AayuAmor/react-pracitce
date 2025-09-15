@@ -41,7 +41,7 @@ export const SeriesCard = ({data}) => {
 
   const Rating = styled.h3`
   font-size:18px;
-  color: ${(props) => props.rating >= 8.5 ? "#51de51" : "#ffff00" };
+  color: ${(props) => props.rating >= 8.5 ? "#51de51" : "#dcdc35" };
   text-transform: captalize;
   `;
 
@@ -55,15 +55,16 @@ export const SeriesCard = ({data}) => {
           height="40%"
         />
       </div>
-      <div className={style["card-content"]}>
+      {/* <div className={style["card-content"]}> */}
+      <div className="flex flex-col gap-6 p-6">
       <h2>Name: {name}</h2>
       
-      <Rating rating = {rating}>Rating:
+      <Rating rating = {rating} ><span className="underline">Rating:</span>
         {/* <span className={`rating ${ rating >= 8.5 ? "superhit" : "average"}`}>  This is conditional stylingNow with Template Linerals `` which allows multiple className */}
           <span className={`${style.rating} ${ratingClass}`}>{rating}</span>
       </Rating>
        
-      <p>Summary: {description}</p>
+      <p className="text-3xl font-bold underline">Summary: {description}</p>
       <p>Cast: {cast}</p>
       <p>Genre: {genre}</p>
       <a href={watch_url} target="_blank">
