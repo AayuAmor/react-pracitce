@@ -39,6 +39,8 @@ export const App = () => {
 };
 ```
 
+{% endraw %}
+
 ---
 
 ## � **Template Literals** (Backticks ``)
@@ -80,6 +82,8 @@ const message = `Hello, my name is ${name} and I am ${age} years old.`;
 
 ---
 
+{% endraw %}
+
 ### 🎨 **Template Literals in React JSX**
 
 #### **1. Dynamic Class Names**
@@ -88,6 +92,8 @@ const message = `Hello, my name is ${name} and I am ${age} years old.`;
 const rating = 9.2;
 const ratingClass = rating >= 8.5 ? "superhit" : "average";
 
+{% endraw %}
+
 // ✅ Template literal for multiple classes
 <span className={`rating ${ratingClass}`}>{rating}</span>;
 
@@ -95,6 +101,8 @@ const ratingClass = rating >= 8.5 ? "superhit" : "average";
 ```
 
 #### **2. Dynamic Styling**
+
+{% endraw %}
 
 ```jsx
 const isActive = true;
@@ -108,6 +116,8 @@ const backgroundColor = "#ff6b6b";
   }}
 >
   Click Me
+
+{% endraw %}
 </button>;
 ```
 
@@ -116,6 +126,8 @@ const backgroundColor = "#ff6b6b";
 ```jsx
 const summary = `In a world where gates connect Earth to dangerous dimensions, 
 hunters with special abilities fight monsters. 
+
+{% endraw %}
 Sung Jin-Woo starts as the weakest hunter but gains incredible power.`;
 
 <p>{summary}</p>;
@@ -123,19 +135,27 @@ Sung Jin-Woo starts as the weakest hunter but gains incredible power.`;
 
 #### **4. Complex Expressions**
 
+{% endraw %}
+
 ```jsx
 const price = 99.99;
+
+{% endraw %}
 const discount = 0.15;
 
 <p>
   Price: ${`$${(price * (1 - discount)).toFixed(2)}`}
   <span>Save ${`$${(price * discount).toFixed(2)}`}</span>
 </p>;
+
+{% endraw %}
 ```
 
 ---
 
 ### 🔍 **Real Examples from Your Code**
+
+{% endraw %}
 
 #### **Example 1: Conditional CSS Classes**
 
