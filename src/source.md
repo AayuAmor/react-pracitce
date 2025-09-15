@@ -10,10 +10,7 @@ For quick reference to all Tailwind utility classes, visit:
 ## ❌ Not Rendered in DOM
 
 React does **not** render the following values:
-
-- `false`
 - `null`
-- `undefined`
 - `NaN`
 
 ## ✅ Rendered in DOM
@@ -30,17 +27,13 @@ import { Fragment } from "react";
 export const App = () => {
   return (
     <Fragment>
-      <Beta />
-      <Beta />
+<!-- Removed {% endraw %} tag -->
       <Beta />
       <Beta />
     </Fragment>
   );
 };
 ```
-
-{% endraw %}
-
 ---
 
 ## � **Template Literals** (Backticks ``)
@@ -69,8 +62,7 @@ const message =
 ```jsx
 const name = "John";
 const age = 25;
-const message = `Hello, my name is ${name} and I am ${age} years old.`;
-```
+<!-- Removed {% endraw %} tag -->
 
 ### 🧠 **Key Syntax:**
 
@@ -79,7 +71,7 @@ const message = `Hello, my name is ${name} and I am ${age} years old.`;
 | **Backticks** `` ` `` | Wrap the entire string | `` `Hello World` ``     |
 | **${variable}**       | Insert variable value  | `` `Name: ${name}` ``   |
 | **${expression}**     | Execute JavaScript     | `` `Total: ${5 + 3}` `` |
-
+<!-- Removed {% endraw %} tag -->
 ---
 
 {% endraw %}
@@ -99,7 +91,7 @@ const ratingClass = rating >= 8.5 ? "superhit" : "average";
 
 // Result: <span className="rating superhit">9.2</span>
 ```
-
+<!-- Removed {% endraw %} tag -->
 #### **2. Dynamic Styling**
 
 {% endraw %}
@@ -109,7 +101,7 @@ const isActive = true;
 const backgroundColor = "#ff6b6b";
 
 // ✅ Template literal in style
-<button
+<!-- Removed {% endraw %} tag -->
   style={{
     backgroundColor: `${isActive ? backgroundColor : "#ccc"}`,
     border: `2px solid ${backgroundColor}`,
@@ -120,7 +112,7 @@ const backgroundColor = "#ff6b6b";
 {% endraw %}
 </button>;
 ```
-
+<!-- Removed {% endraw %} tag -->
 #### **3. Multi-line Strings**
 
 ```jsx
@@ -128,14 +120,13 @@ const summary = `In a world where gates connect Earth to dangerous dimensions,
 hunters with special abilities fight monsters. 
 
 {% endraw %}
-Sung Jin-Woo starts as the weakest hunter but gains incredible power.`;
+<!-- Removed {% endraw %} tag -->
 
 <p>{summary}</p>;
-```
 
 #### **4. Complex Expressions**
 
-{% endraw %}
+<!-- Removed {% endraw %} tag -->
 
 ```jsx
 const price = 99.99;
@@ -171,7 +162,6 @@ const rating_condition = rating >= 8.5 ? "superhit" : "average";
 // - `${rating_condition}` → Dynamic class ("superhit" or "average")
 // - Result: "rating superhit" or "rating average"
 ```
-
 #### **Example 2: Dynamic URLs**
 
 ```jsx
@@ -182,7 +172,6 @@ const baseUrl = "https://api.movies.com";
 const apiUrl = `${baseUrl}/movies/${movieId}/details`;
 // Result: "https://api.movies.com/movies/123/details"
 ```
-
 #### **Example 3: Dynamic Alt Text**
 
 ```jsx
@@ -207,7 +196,6 @@ const movieName = "Stranger Things";
 
 ### ✅ Ternary Operator
 
-```jsx
 <button>{age >= 18 ? "Watch Now" : "Not Available"}</button>
 ```
 
@@ -219,11 +207,7 @@ if (age >= 18) canWatch = "Watch Now";
 
 <button>{canWatch}</button>;
 ```
-
-### ✅ Function
-
 ```jsx
-const watch = () => (age >= 18 ? "Watch Now" : "Not Available");
 
 <button>{watch()}</button>;
 ```
@@ -262,16 +246,11 @@ const NetflixSeries = () => {
 .superhit {
   const rating = "9.5";
   const summary = `In a world where gates connect Earth...`;
-  const age = 21;
 .average {
 
   const returnGenre = () => "Adventure, Action-Drama";
 ````
-
-#### 2. Import and Use in Component
-
 ```jsx
-import styles from "./Netflix.module.css";
 
 export const SeriesCard = ({ data }) => {
 
@@ -281,7 +260,6 @@ export const SeriesCard = ({ data }) => {
     <>
       <div>
         <img src="image.png" alt="poster" width="40%" height="40%" />
-        <h2>Name: {name}</h2>
         <h3>Rating: {rating}</h3>
 ```
 
@@ -295,15 +273,10 @@ export const SeriesCard = ({ data }) => {
 
 ---
 
-### 💡 Pro Tips
 
 | Tip              | Description                                              |
 | ---------------- | -------------------------------------------------------- |
-| Use camelCase    | For multi-word class names, use camelCase in CSS and JS  |
-| Dynamic classes  | Use ternary or template literals for conditional styling |
-| No global styles | Avoid using global selectors in module files             |
 
----
 
 ### 📝 Example: Conditional Styling with CSS Modules
 
@@ -314,7 +287,6 @@ export const SeriesCard = ({ data }) => {
   }`}
 >
   {rating}
-</span>
 ```
 
 ---
@@ -356,12 +328,7 @@ export const App = () => {
     <>
       {/* <Header /> */}
       <NetflixSeries />
-      <NetflixSeries />
-      <NetflixSeries />
-      <NetflixSeries />
-      <NetflixSeries />
       {/* <Footer /> */}
-    </>
   );
 };
 ````
@@ -406,7 +373,6 @@ const App = () => {
     <div>
       {/* ✅ Sending data to child component */}
       <SeriesCard data={movieData} />
-    </div>
   );
 };
 ```
@@ -459,7 +425,6 @@ const SeriesCard = ({ data }) => {
     <li>
       <img src={img_url} width="40%" height="40%" />
       <h2>Name: {name}</h2>
-      <h3>Rating: {rating}</h3>
       <p>Summary: {description}</p>
       <p>Cast: {cast}</p>
       <p>Genre: {genre}</p>
@@ -496,10 +461,7 @@ const SeriesCard = ({ data }) => {
 ### 📥 **Child Component:**
 
 ```jsx
-const ProfileCard = ({ name, age, greeting, children }) => {
-  // ✅ Destructuring extracts:
   // - name: "Alice"
-  // - age: 38
   // - greeting: <strong>Hi Alice!</strong>
   // - children: <p>Hobbies...</p> + <button>Contact</button>
 
@@ -564,13 +526,9 @@ A heading also uses inline styles:
 
 ```jsx
 <h3 style={{ fontSize: "18px" }}>Rating: {rating}</h3>
-```
 
-## ✅ Why Use Inline Styles?
 
-Scoped: Styles are isolated to the component.
 
-Quick: Easy for one-off styling needs.
 
 Dynamic: Can be modified based on props or state.
 
@@ -620,7 +578,6 @@ export const SeriesCard = ({ data }) => {
   return (
     <li className="card">
       <div>
-        <img src={img_url} width="40%" height="40%" />
       </div>
       <div className="card-content">
         <h2>Name: {name}</h2>
