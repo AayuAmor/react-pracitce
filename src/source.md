@@ -34,6 +34,7 @@ export const App = () => {
   );
 };
 ```
+
 ---
 
 ## � **Template Literals** (Backticks ``)
@@ -59,7 +60,7 @@ const message =
 
 #### ✅ **New Way (Template Literals)**
 
-```jsx
+````jsx
 const name = "John";
 const age = 25;
 <!-- Removed {% endraw %} tag -->
@@ -90,8 +91,10 @@ const ratingClass = rating >= 8.5 ? "superhit" : "average";
 <span className={`rating ${ratingClass}`}>{rating}</span>;
 
 // Result: <span className="rating superhit">9.2</span>
-```
+````
+
 <!-- Removed {% endraw %} tag -->
+
 #### **2. Dynamic Styling**
 
 {% endraw %}
@@ -112,12 +115,14 @@ const backgroundColor = "#ff6b6b";
 {% endraw %}
 </button>;
 ```
+
 <!-- Removed {% endraw %} tag -->
+
 #### **3. Multi-line Strings**
 
-```jsx
-const summary = `In a world where gates connect Earth to dangerous dimensions, 
-hunters with special abilities fight monsters. 
+````jsx
+const summary = `In a world where gates connect Earth to dangerous dimensions,
+hunters with special abilities fight monsters.
 
 {% endraw %}
 <!-- Removed {% endraw %} tag -->
@@ -140,7 +145,7 @@ const discount = 0.15;
 </p>;
 
 {% endraw %}
-```
+````
 
 ---
 
@@ -162,6 +167,7 @@ const rating_condition = rating >= 8.5 ? "superhit" : "average";
 // - `${rating_condition}` → Dynamic class ("superhit" or "average")
 // - Result: "rating superhit" or "rating average"
 ```
+
 #### **Example 2: Dynamic URLs**
 
 ```jsx
@@ -172,6 +178,7 @@ const baseUrl = "https://api.movies.com";
 const apiUrl = `${baseUrl}/movies/${movieId}/details`;
 // Result: "https://api.movies.com/movies/123/details"
 ```
+
 #### **Example 3: Dynamic Alt Text**
 
 ```jsx
@@ -197,7 +204,8 @@ const movieName = "Stranger Things";
 ### ✅ Ternary Operator
 
 <button>{age >= 18 ? "Watch Now" : "Not Available"}</button>
-```
+
+````
 
 ### ✅ Variable
 
@@ -206,10 +214,10 @@ let canWatch = "Not Available";
 if (age >= 18) canWatch = "Watch Now";
 
 <button>{canWatch}</button>;
-```
-```jsx
+````
 
-<button>{watch()}</button>;
+```jsx
+<button>{watch()}</button>
 ```
 
 ---
@@ -250,6 +258,7 @@ const NetflixSeries = () => {
 
   const returnGenre = () => "Adventure, Action-Drama";
 ````
+
 ```jsx
 
 export const SeriesCard = ({ data }) => {
@@ -273,10 +282,8 @@ export const SeriesCard = ({ data }) => {
 
 ---
 
-
-| Tip              | Description                                              |
-| ---------------- | -------------------------------------------------------- |
-
+| Tip | Description |
+| --- | ----------- |
 
 ### 📝 Example: Conditional Styling with CSS Modules
 
@@ -524,7 +531,7 @@ const btn_style = {
 
 A heading also uses inline styles:
 
-```jsx
+````jsx
 <h3 style={{ fontSize: "18px" }}>Rating: {rating}</h3>
 
 
@@ -595,7 +602,7 @@ export const SeriesCard = ({ data }) => {
     </li>
   );
 };
-```
+````
 
 ---
 
