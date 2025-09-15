@@ -205,7 +205,6 @@ const watch = () => (age >= 18 ? "Watch Now" : "Not Available");
 
 ## 🎥 NetflixSeries Component
 
-
 ## 🧩 CSS Modules in React
 
 ### 🎯 What Are CSS Modules?
@@ -226,7 +225,7 @@ CSS Modules are a way to write CSS that is scoped to a specific component, preve
 
 `Netflix.module.css`
 
-```css
+````css
 .card {
 ### `NetflixSeries.jsx`
 
@@ -240,7 +239,7 @@ const NetflixSeries = () => {
 .average {
 
   const returnGenre = () => "Adventure, Action-Drama";
-```
+````
 
 #### 2. Import and Use in Component
 
@@ -271,18 +270,24 @@ export const SeriesCard = ({ data }) => {
 
 ### 💡 Pro Tips
 
-| Tip | Description |
-|-----|-------------|
-| Use camelCase | For multi-word class names, use camelCase in CSS and JS |
-| Dynamic classes | Use ternary or template literals for conditional styling |
-| No global styles | Avoid using global selectors in module files |
+| Tip              | Description                                              |
+| ---------------- | -------------------------------------------------------- |
+| Use camelCase    | For multi-word class names, use camelCase in CSS and JS  |
+| Dynamic classes  | Use ternary or template literals for conditional styling |
+| No global styles | Avoid using global selectors in module files             |
 
 ---
 
 ### 📝 Example: Conditional Styling with CSS Modules
 
 ```jsx
-<span className={`${styles.rating} ${rating >= 8.5 ? styles.superhit : styles.average}`}>{rating}</span>
+<span
+  className={`${styles.rating} ${
+    rating >= 8.5 ? styles.superhit : styles.average
+  }`}
+>
+  {rating}
+</span>
 ```
 
 ---
@@ -294,12 +299,14 @@ export const SeriesCard = ({ data }) => {
 - Encourages modular design
 
 ---
+
         <p>Summary: {summary}</p>
         <p>Genre: {returnGenre()}</p>
         <button>{watch()}</button>
       </div>
     </>
-  );
+
+);
 };
 
 // ✅ Default Export (Main/Parent Component)
@@ -308,7 +315,8 @@ export default NetflixSeries;
 // ✅ Named Exports (Child/Additional Components)
 export const Header = () => <p>Copyright @AayushDada</p>;
 export const Footer = () => <p>Copyright @AayushDada</p>;
-```
+
+````
 
 ### `App.jsx`
 
@@ -329,7 +337,7 @@ export const App = () => {
     </>
   );
 };
-```
+````
 
 ### 🧠 Import Syntax Breakdown
 
@@ -605,7 +613,6 @@ export const SeriesCard = ({ data }) => {
 };
 ```
 
-
 ---
 
 ## ⚡ React useState Hook
@@ -621,11 +628,7 @@ import { useState } from "react";
 
 function Counter() {
   const [count, setCount] = useState(0); // Initial value is 0
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      Count: {count}
-    </button>
-  );
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }
 ```
 
@@ -642,6 +645,47 @@ function Counter() {
 
 ---
 
+---
+
+## 🌟 Styled-Components & Advanced Conditional Styling
+
+### 🎯 What are Styled-Components?
+
+Styled-components is a library for React that lets you write CSS directly in your JavaScript files using tagged template literals. It enables dynamic, component-scoped styles and supports conditional logic based on props.
+
+### 🚀 Basic Usage
+
+```jsx
+import styled from "styled-components";
+
+const Button = styled.button`
+  padding: 1.2rem 2.4rem;
+  border: none;
+  border-radius: 100rem;
+  font-size: 1.6rem;
+  background-color: ${(props) => (props.rating >= 8.5 ? "#51de51" : "#ffff00")};
+  color: var(--btn-color);
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+// Usage in JSX
+<Button rating={rating}>Watch Now</Button>;
+```
+
+### 🧠 Conditional Styling with Props
+
+- You can use props in styled-components to change styles dynamically.
+- Example: `background-color` changes based on the `rating` prop.
+
+### 💡 Pro Tips
+
+- Use styled-components for reusable, dynamic styles.
+- Combine with CSS Modules for local scoping and global themes.
+- You can style any HTML element or custom React component.
+
+---
+
 ## 🧠 Key Concepts (Overall)
 
 - JSX skips rendering `false`, `null`, `undefined`, `NaN`
@@ -654,3 +698,4 @@ function Counter() {
 - Template literals for dynamic classes/styles
 - CSS Modules for locally scoped styles
 - useState for state in functional components
+- styled-components for dynamic, prop-based styling
