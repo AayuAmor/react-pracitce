@@ -1,3 +1,5 @@
+import style from "./Netflix.module.css";
+
 export const SeriesCard = ({data}) => {
   const { img_url,name, rating, description, cast, genre, watch_url} = data;
   const btn_style={
@@ -11,27 +13,24 @@ export const SeriesCard = ({data}) => {
       
         
   }
-  const rating_condition = rating >= 8.5 ? "superhit" : "average";
+  const ratingClass = rating >= 8.5 ? style.superhit : style.average;
   return (
-    <li className="card">
-      
-        <div>
+    <li className={style.card}>
+      <div>
         <img
           src={img_url}
           width="40%"
           height="40%"
         />
       </div>
-      <div className="card-content">
+      <div className={style["card-content"]}>
       <h2>Name: {name}</h2>
       <h3 style={{fontSize:"18px"}}>Rating:
-        {""}
+
 
         {/* <span className={`rating ${ rating >= 8.5 ? "superhit" : "average"}`}>  This is conditional stylingNow with Template Linerals `` which allows multiple className */}
 
-         <span className={`rating ${ rating_condition}`}>  {/* Passing  variable for conditional styling*/}
-
-        {""} 
+         <span className={`${style.rating} ${ratingClass}`}>
         {rating}
         </span>
         </h3>
