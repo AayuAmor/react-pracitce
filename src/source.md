@@ -579,7 +579,7 @@ const handleClick = () => alert('Button clicked!');
 
 ---
 
-## 16. SyntheticBaseEvent
+### What is SyntheticBaseEvent ?
 
 React wraps browser events in a Synthetic Event for cross-browser consistency. Use event objects in handlers just like native events.
 
@@ -596,7 +596,62 @@ React wraps browser events in a Synthetic Event for cross-browser consistency. U
 
 ---
 
-## 🧩 16. Pro Tips
+## 🧩 16. Event Handling as Props
+
+### 🎯 What is Event Handling as Props?
+
+Event handling as props is a React pattern where event handler functions are passed from a parent component to a child component via props. This allows the parent to control what happens when an event occurs in the child, enabling better code reuse and separation of concerns.
+
+### 📦 Usage Example
+
+```jsx
+// Parent Component
+export const EventProps = () => {
+  const handleOnClick = (userName) => {
+    console.log(`Hay ${userName}, Welcome`);
+  };
+  const handleHover = (userName) => {
+    console.log(`Thanks For Hover me ${userName}`);
+  };
+
+  return (
+    <WelcomeUser
+      onClick={() => handleOnClick("Aayush")}
+      onMouseEnter={() => handleHover("Aayush")}
+    />
+  );
+};
+
+// Child Component
+const WelcomeUser = (props) => {
+  const handleNewClick = () => {
+    console.log(`Hello Bro, You Clicked Me For More..`);
+    props.onClick();
+  };
+
+  return (
+    <>
+      <button onClick={() => props.onClick()}>Click Me!!</button>
+      <button onMouseEnter={() => props.onMouseEnter()}>Hover Me!!!</button>
+      <button onClick={() => handleNewClick()}>Click Me For More !!</button>
+    </>
+  );
+};
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Event Handling as Props Interview Questions</span>**
+
+- **What does it mean to pass an event handler as a prop in React?**
+  - _It means sending a function from a parent to a child component via props, so the child can call it when an event occurs._
+- **Why would you pass event handlers as props instead of defining them in the child?**
+  - _This allows the parent to control the behavior, making components more reusable and keeping business logic in one place._
+- **How does the child component use an event handler received as a prop?**
+  - _The child attaches the function to an event (like onClick) and calls it, optionally passing arguments._
+- **Can the child component modify the event handler function it receives?**
+  - _No, but it can wrap or call it with different arguments. The function itself is controlled by the parent._
+
+## 🧩 17. Pro Tips
 
 - Destructure props for readability
 - Use conditional rendering for dynamic UIs
