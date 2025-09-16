@@ -1,267 +1,413 @@
+# React Revision Guide
+
+## Table of Contents
+
+### Basics
+
+1. [JSX](#1-jsx)
+2. [Components in React](#2-components-in-react)
+3. [Dynamic Values](#3-dynamic-values)
+4. [Conditional Rendering](#4-conditional-rendering)
+5. [Import and Export](#5-import-and-export)
+6. [Loops in JSX](#6-loops-in-jsx)
+
+### Props
+
+7. [Props](#7-props)
+8. [React Destructuring Props](#8-react-destructuring-props)
+
+### CSS
+
+9. [Add CSS Styling](#9-add-css-styling)
+10. [Inline CSS in React](#10-inline-css-in-react)
+11. [Conditional Styling for Dynamic UIs](#11-conditional-styling-for-dynamic-uis)
+12. [CSS Modules](#12-css-modules)
+13. [Styled Components](#13-styled-components)
+14. [Tailwind CSS in React](#14-tailwind-css-in-react)
+
+### Events
+
+15. [Event Handling in React](#15-event-handling-in-react)
+
+### Pro Tips
+
+16. [Pro Tips](#16-pro-tips)
+
 ---
 
-## ⚡ React Event Handling
+## 🧩 1. JSX
 
-### 🎯 What is Event Handling in React?
+### 🎯 What is JSX?
 
-Event handling lets you respond to user actions (like clicks, typing, etc.) using handler functions. You attach these handlers to JSX elements using props like `onClick`, `onChange`, etc.
+JSX (JavaScript XML) lets you write HTML-like code inside JavaScript. It makes UI code more readable and expressive.
 
-### 🚀 Example: Button Click Event
+### 🚀 Key Features
+
+- **HTML-like syntax**: Write elements as you would in HTML.
+- **JS expressions**: Use `{}` to embed JavaScript (variables, functions, etc.).
+- **Not rendered**: `null`, `NaN`, `false`, `undefined` (these are ignored in output)
+- **Rendered**: `0`, `""` (these are rendered)
+
+### 📦 Usage Example
 
 ```jsx
-export const EventHandling = () => {
-  const handleButtonClick = (beti) => {
-    alert(`Hey I am ${beti} OnClick Event`);
-  };
+const userName = "Aayush";
+<h1>Hello, {userName}!</h1>;
+```
 
-  return (
-    <>
-      {/* <button onClick={handleButtonClick}>Click Me!</button> */}
-      <button onClick={() => handleButtonClick("horney")}>Click Me!</button>
-    </>
-  );
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">$JSX Interview Questions$</span>**
+
+- **What is JSX and why is it used in React?**
+  - _JSX is a syntax extension for JavaScript that lets you write HTML-like code in React. It makes UI code more readable and allows embedding JavaScript expressions directly in markup._
+- **What happens if you return `null` or `false` in JSX?**
+  - _React ignores `null` and `false` in JSX, so nothing is rendered for those values._
+- **Can you use loops or if statements directly inside JSX?**
+  - _You cannot use statements like `for` or `if` directly in JSX, but you can use expressions (like ternary or `.map()`) inside curly braces._
+
+---
+
+---
+
+## 🧩 2. Components in React
+
+### 🎯 What are Components?
+
+Components are reusable, independent pieces of UI. They must start with an uppercase letter and return JSX.
+
+### 🚀 Key Features
+
+- **Reusable**: Use the same component in multiple places.
+- **Compositional**: Build complex UIs by combining components.
+- **Functional or Class**: Most modern React code uses functional components.
+
+### 📦 Usage Example
+
+```jsx
+function Welcome() {
+  return <h2>Welcome!</h2>;
+}
+export default Welcome;
+
+// Usage in another file
+import Welcome from "./Welcome";
+<Welcome />;
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Components Interview Questions</span>**
+
+- **What is a React component?**
+  - _A React component is a reusable, self-contained piece of UI that returns JSX and can accept props._
+- **Why must component names start with an uppercase letter?**
+  - _React treats lowercase tags as HTML elements. Custom components must start with uppercase so React knows to treat them as components._
+- **What is the difference between functional and class components?**
+  - _Functional components are functions that return JSX. Class components use ES6 classes and can have lifecycle methods and state (before hooks)._
+
+---
+
+---
+
+## 🧩 3. Dynamic Values
+
+### 🎯 What are Dynamic Values?
+
+You can embed JavaScript expressions inside JSX using curly braces `{}`. This allows you to display variables, call functions, or compute values on the fly.
+
+### 📦 Usage Example
+
+```jsx
+const age = 21;
+<p>Age: {age}</p>;
+
+const getGreeting = () => "Hello!";
+<h2>{getGreeting()}</h2>;
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Dynamic Values Interview Questions</span>**
+
+- **How do you embed a JavaScript variable in JSX?**
+  - _Wrap the variable in curly braces, e.g., `{age}`._
+- **Can you call a function inside JSX? Give an example.**
+  - _Yes, you can call a function inside curly braces, e.g., `<h2>{getGreeting()}</h2>`._
+- **What is the difference between using `{}` and `""` in JSX?**
+  - _Curly braces evaluate JavaScript expressions; quotes create string literals._
+
+---
+
+---
+
+## 🧩 4. Conditional Rendering
+
+### 🎯 What is Conditional Rendering?
+
+Show or hide parts of the UI based on conditions. Use ternary operators, logical `&&`, or functions to decide what to render.
+
+### 📦 Usage Example
+
+```jsx
+// Ternary
+{
+  isLoggedIn ? <Home /> : <Login />;
+}
+
+// Logical AND
+{
+  count > 0 && <span>Items: {count}</span>;
+}
+
+// Function-based
+function renderStatus(status) {
+  if (status === "loading") return <Loader />;
+  if (status === "error") return <ErrorMsg />;
+  return <Content />;
+}
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Conditional Rendering Interview Questions</span>**
+
+- **How do you conditionally render content in React?**
+  - _Use ternary operators, logical AND (`&&`), or functions inside curly braces in JSX._
+- **What is the difference between using a ternary and logical AND (`&&`) in JSX?**
+  - _Ternary returns one of two values; logical AND only renders the right side if the left is true._
+- **How would you render nothing for a certain condition?**
+  - _Return `null`, `false`, or `undefined` in JSX to render nothing._
+
+---
+
+---
+
+## 🧩 5. Import and Export
+
+### 🎯 Why Import/Export?
+
+Share code between files by exporting and importing components, functions, or variables.
+
+### 📦 Usage Example
+
+```jsx
+// Default export
+export default App;
+import App from "./App";
+
+// Named export
+export const Header = () => <header>Header</header>;
+import { Header } from "./Header";
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Import/Export Interview Questions</span>**
+
+- **What is the difference between default and named exports?**
+  - _Default exports allow one export per file; named exports allow multiple exports per file._
+- **How do you import multiple named exports from a file?**
+  - _Use curly braces: `import { A, B } from './file'`._
+- **Why is it important to use export/import in React projects?**
+  - _It enables modular code, code reuse, and better organization._
+
+---
+
+---
+
+## 🧩 6. Loops in JSX
+
+### 🎯 Why Loops in JSX?
+
+Render lists of elements by mapping over arrays. Each child must have a unique `key` prop.
+
+### 📦 Usage Example
+
+```jsx
+const movies = [
+  { id: 1, name: "Inception" },
+  { id: 2, name: "Interstellar" },
+];
+<ul>
+  {movies.map((movie) => (
+    <li key={movie.id}>{movie.name}</li>
+  ))}
+</ul>;
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Loops Interview Questions</span>**
+
+- **Why do you need a unique `key` prop when rendering lists?**
+  - _Keys help React identify which items have changed, are added, or are removed._
+- **What happens if you forget to add a key in a `.map()` loop?**
+  - _React will warn you and may have trouble efficiently updating the list._
+- **Can you use `for` loops directly in JSX?**
+  - _No, but you can use `.map()` or prepare arrays before returning JSX._
+
+---
+
+---
+
+## 🧩 7. Props
+
+### 🎯 What are Props?
+
+Props (properties) let you pass data from parent to child components. Props are read-only and help make components reusable.
+
+### 📦 Usage Example
+
+```jsx
+// Parent
+<Card title="Hello" rating={5} />;
+
+// Child (Card.jsx)
+export const Card = (props) => (
+  <h2>
+    {props.title} - {props.rating}
+  </h2>
+);
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Props Interview Questions</span>**
+
+- **What are props in React?**
+  - _Props are inputs to components, passed from parent to child, and are read-only._
+- **Are props mutable or immutable?**
+  - _Props are immutable; you cannot change them inside the child component._
+- **How do you pass a function as a prop?**
+  - _Pass the function reference as a prop, e.g., `<Child onClick={handleClick} />`._
+
+---
+
+---
+
+## 🧩 8. React Destructuring Props
+
+### 🎯 Why Destructure Props?
+
+Destructuring makes code cleaner and easier to read, especially with many props.
+
+### 📦 Usage Example
+
+```jsx
+// Instead of (props)
+export const Card = ({ title, rating }) => (
+  <h2>
+    {title} - {rating}
+  </h2>
+);
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Destructuring Props Interview Questions</span>**
+
+- **What is destructuring in the context of React props?**
+  - _Destructuring is extracting values from objects/arrays, e.g., `({ title })` instead of `(props)`._
+- **Why is destructuring props considered a best practice?**
+  - _It makes code cleaner and easier to read, especially with many props._
+- **How do you destructure nested props?**
+  - _Use nested destructuring: `({ data: { name, rating } })`._
+
+---
+
+---
+
+## 🧩 9. Add CSS Styling
+
+### 🎯 How to Add CSS?
+
+Import CSS files for global or component-specific styles. Use class names as usual.
+
+### 📦 Usage Example
+
+```jsx
+// App.css
+.main-title {
+  color: #007bff;
+  font-size: 2rem;
+}
+
+// In your component
+import './App.css';
+<h1 className="main-title">Hello</h1>
+```
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">CSS Interview Questions</span>**
+
+- **How do you add global CSS to a React project?**
+  - _Import the CSS file in your JS file, e.g., `import './App.css'`._
+- **What is the difference between global and component-scoped CSS?**
+  - _Global CSS affects the whole app; component-scoped CSS only affects one component._
+- **Can you use CSS preprocessors like SASS with React?**
+  - _Yes, you can use SASS, LESS, etc., by configuring your build tools._
+
+---
+
+---
+
+## 🧩 10. Inline CSS in React
+
+### 🎯 Why Inline CSS?
+
+Use the `style` prop for quick, component-scoped styles. The value is a JS object with camelCase keys.
+
+### 📦 Usage Example
+
+```jsx
+<h2 style={{ color: "red", fontSize: "20px" }}>Hello</h2>;
+
+const btnStyle = {
+  padding: "1rem 2rem",
+  backgroundColor: "#333",
+  color: "#fff",
 };
+<button style={btnStyle}>Click Me</button>;
 ```
 
-### 🧠 Key Points
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Inline CSS Interview Questions</span>**
 
-- Use camelCase for event props: `onClick`, `onChange`, etc.
-- Pass a function reference or an inline arrow function.
-- You can pass arguments to handlers using arrow functions.
-
-### 💡 Pro Tips
-
-- Use event handlers to update state, show alerts, or trigger any logic.
-- You can reuse handler functions for multiple elements.
----
-
-## 🔗 Tailwind CSS Documentation
-
-For quick reference to all Tailwind utility classes, visit:
-
-[Tailwind CSS Docs](https://tailwindcss.com/docs/)
-
-# ✅ `React JSX` Notes
-
-## ❌ Not Rendered in DOM
-
-React does **not** render the following values:
-
-- `null`
-- `NaN`
-
-## ✅ Rendered in DOM
-
-- `0` → Shown
-- `""` (empty string) → Blank but rendered
+- **How do you apply inline styles in React?**
+  - _Use the `style` prop with a JS object, e.g., `style={{ color: 'red' }}`._
+- **Why are CSS property names camelCased in React inline styles?**
+  - _Because JavaScript object keys cannot have dashes, so `font-size` becomes `fontSize`._
+- **What are the limitations of inline styles?**
+  - _No pseudo-classes, media queries, or global styles; not ideal for large projects._
 
 ---
 
-## 📦 Fragment Usage Example
-
-```jsx
-import { Fragment } from "react";
-export const App = () => {
-  return (
-    <Fragment>
-<!-- Removed {% endraw %} tag -->
-      <Beta />
-      <Beta />
-    </Fragment>
-  );
-};
-```
-
 ---
 
-## � **Template Literals** (Backticks ``)
+## 🧩 11. Conditional Styling for Dynamic UIs
 
-### 🎯 **What Are Template Literals?**
+### 🎯 Why Conditional Styling?
 
-Template literals are a way to create strings using **backticks (`)** instead of quotes. They allow you to:
+Change styles or classes based on data or state for dynamic UIs.
 
-- **Embed variables** directly in strings
-- **Create multi-line strings**
-- **Execute JavaScript expressions** inside strings
-
-### 🔄 **Regular Strings vs Template Literals**
-
-#### ❌ **Old Way (String Concatenation)**
-
-```jsx
-const name = "John";
-const age = 25;
-const message =
-  "Hello, my name is " + name + " and I am " + age + " years old.";
-```
-
-#### ✅ **New Way (Template Literals)**
-
-````jsx
-const name = "John";
-const age = 25;
-<!-- Removed {% endraw %} tag -->
-
-### 🧠 **Key Syntax:**
-
-| Syntax                | Purpose                | Example                 |
-| --------------------- | ---------------------- | ----------------------- |
-| **Backticks** `` ` `` | Wrap the entire string | `` `Hello World` ``     |
-| **${variable}**       | Insert variable value  | `` `Name: ${name}` ``   |
-| **${expression}**     | Execute JavaScript     | `` `Total: ${5 + 3}` `` |
-<!-- Removed {% endraw %} tag -->
----
-
-{% endraw %}
-
-### 🎨 **Template Literals in React JSX**
-
-#### **1. Dynamic Class Names**
+### 📦 Usage Example
 
 ```jsx
 const rating = 9.2;
-const ratingClass = rating >= 8.5 ? "superhit" : "average";
+<span className={`rating ${rating >= 8.5 ? 'superhit' : 'average'}`}>{rating}</span>
 
-{% endraw %}
-
-// ✅ Template literal for multiple classes
-<span className={`rating ${ratingClass}`}>{rating}</span>;
-
-// Result: <span className="rating superhit">9.2</span>
-````
-
-<!-- Removed {% endraw %} tag -->
-
-#### **2. Dynamic Styling**
-
-{% endraw %}
-
-```jsx
-const isActive = true;
-const backgroundColor = "#ff6b6b";
-
-// ✅ Template literal in style
-<!-- Removed {% endraw %} tag -->
-  style={{
-    backgroundColor: `${isActive ? backgroundColor : "#ccc"}`,
-    border: `2px solid ${backgroundColor}`,
-  }}
->
-  Click Me
-
-{% endraw %}
-</button>;
+// Inline style
+<button style={{ backgroundColor: isActive ? 'green' : 'gray' }}>Toggle</button>
 ```
 
-<!-- Removed {% endraw %} tag -->
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Conditional Styling Interview Questions</span>**
 
-#### **3. Multi-line Strings**
-
-````jsx
-const summary = `In a world where gates connect Earth to dangerous dimensions,
-hunters with special abilities fight monsters.
-
-{% endraw %}
-<!-- Removed {% endraw %} tag -->
-
-<p>{summary}</p>;
-
-#### **4. Complex Expressions**
-
-<!-- Removed {% endraw %} tag -->
-
-```jsx
-const price = 99.99;
-
-{% endraw %}
-const discount = 0.15;
-
-<p>
-  Price: ${`$${(price * (1 - discount)).toFixed(2)}`}
-  <span>Save ${`$${(price * discount).toFixed(2)}`}</span>
-</p>;
-
-{% endraw %}
-````
+- **How do you apply conditional classes in React?**
+  - _Use template literals or ternary operators to set className based on conditions._
+- **What is the difference between conditional class and conditional inline style?**
+  - _Conditional class changes the CSS class; conditional inline style changes the style object directly._
+- **How would you highlight an item in a list based on a condition?**
+  - _Apply a special class or style if the condition is met, e.g., `className={isActive ? 'active' : ''}`._
 
 ---
 
-### 🔍 **Real Examples from Your Code**
-
-{% endraw %}
-
-#### **Example 1: Conditional CSS Classes**
-
-```jsx
-// Your SeriesCard component
-const rating_condition = rating >= 8.5 ? "superhit" : "average";
-
-// ✅ Template literal combining static + dynamic classes
-<span className={`rating ${rating_condition}`}>{rating}</span>;
-
-// Breakdown:
-// - `rating ` → Static class (with space)
-// - `${rating_condition}` → Dynamic class ("superhit" or "average")
-// - Result: "rating superhit" or "rating average"
-```
-
-#### **Example 2: Dynamic URLs**
-
-```jsx
-const movieId = 123;
-const baseUrl = "https://api.movies.com";
-
-// ✅ Template literal for API endpoint
-const apiUrl = `${baseUrl}/movies/${movieId}/details`;
-// Result: "https://api.movies.com/movies/123/details"
-```
-
-#### **Example 3: Dynamic Alt Text**
-
-```jsx
-const movieName = "Stranger Things";
-
-// ✅ Template literal for accessibility
-<img src={img_url} alt={`${movieName} poster`} width="40%" height="40%" />;
-```
-
 ---
 
-### 💡 **Pro Tips**
-
-| Tip                   | Description                         | Example                                              |
-| --------------------- | ----------------------------------- | ---------------------------------------------------- |
-| **Spaces Matter**     | Include spaces in template literals | `` `rating ${condition}` ``                          |
-| **Nested Templates**  | Use templates inside templates      | `` `${isActive ? `active ${theme}` : 'inactive'}` `` |
-| **Function Calls**    | Call functions inside ${}           | `` `Result: ${calculateTotal()}` ``                  |
-| **Ternary Operators** | Use conditionals directly           | `` `${age >= 18 ? 'Adult' : 'Minor'}` ``             |
-
----
-
-### ✅ Ternary Operator
-
-<button>{age >= 18 ? "Watch Now" : "Not Available"}</button>
-
-````
-
-### ✅ Variable
-
-```jsx
-let canWatch = "Not Available";
-if (age >= 18) canWatch = "Watch Now";
-
-<button>{canWatch}</button>;
-````
-
-```jsx
-<button>{watch()}</button>
-```
-
----
-
-## 🎥 NetflixSeries Component
-
-## 🧩 CSS Modules in React
+## 🧩 12. CSS Modules
 
 ### 🎯 What Are CSS Modules?
 
@@ -277,411 +423,70 @@ CSS Modules are a way to write CSS that is scoped to a specific component, preve
 
 ### 📦 Usage Example
 
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">CSS Modules Interview Questions</span>**
+
+- **What are CSS Modules and why are they useful?**
+  - _CSS Modules scope CSS to a component, preventing style conflicts and global pollution._
+- **How do you use a CSS Module in a React component?**
+  - _Import the module as an object and use its properties as class names, e.g., `className={styles.card}`._
+- **How do CSS Modules prevent style conflicts?**
+  - _They generate unique class names for each component._
+
 #### 1. Create a CSS Module file
 
 `Netflix.module.css`
 
-````css
+```css
 .card {
-### `NetflixSeries.jsx`
-
-```jsx
-const NetflixSeries = () => {
-  const name = "Solo Leveling";
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+}
 .superhit {
-  const rating = "9.5";
-  const summary = `In a world where gates connect Earth...`;
+  color: green;
+  font-weight: bold;
+}
 .average {
-
-  const returnGenre = () => "Adventure, Action-Drama";
-````
-
-```jsx
-
-export const SeriesCard = ({ data }) => {
-
-  const watch = () => (age >= 18 ? "Watch Now" : "Not Available");
-
-  return (
-    <>
-      <div>
-        <img src="image.png" alt="poster" width="40%" height="40%" />
-        <h3>Rating: {rating}</h3>
-```
-
----
-
-### 🧠 How It Works
-
-- **Import**: `import styles from "./Netflix.module.css";`
-- **Usage**: `className={styles.card}` or `className={styles.superhit}`
-- **Result**: Class names are transformed to unique values (e.g., `card_xyz123`)
-
----
-
-| Tip | Description |
-| --- | ----------- |
-
-### 📝 Example: Conditional Styling with CSS Modules
-
-```jsx
-<span
-  className={`${styles.rating} ${
-    rating >= 8.5 ? styles.superhit : styles.average
-  }`}
->
-  {rating}
-```
-
----
-
-## 🧠 Recap: Why CSS Modules?
-
-- Prevents style conflicts
-- Makes components portable
-- Encourages modular design
-
----
-
-        <p>Summary: {summary}</p>
-        <p>Genre: {returnGenre()}</p>
-        <button>{watch()}</button>
-      </div>
-    </>
-
-);
-};
-
-// ✅ Default Export (Main/Parent Component)
-export default NetflixSeries;
-
-// ✅ Named Exports (Child/Additional Components)
-export const Header = () => <p>Copyright @AayushDada</p>;
-export const Footer = () => <p>Copyright @AayushDada</p>;
-
-````
-
-### `App.jsx`
-
-```jsx
-// ✅ Mixed Import: Default + Named Exports
-import NetflixSeries, { Footer, Header } from "./components/NetflixSeries";
-
-export const App = () => {
-  return (
-    <>
-      {/* <Header /> */}
-      <NetflixSeries />
-      {/* <Footer /> */}
-  );
-};
-````
-
-### 🧠 Import Syntax Breakdown
-
-| Import Type | Syntax                                     | Description                    |
-| ----------- | ------------------------------------------ | ------------------------------ |
-| **Default** | `import NetflixSeries`                     | Main component (no `{}`)       |
-| **Named**   | `import { Header, Footer }`                | Additional exports (with `{}`) |
-| **Mixed**   | `import NetflixSeries, { Header, Footer }` | Both in one line               |
-
-#### **Key Points:**
-
-- **Default Export**: One per file, usually the main component
-- **Named Exports**: Multiple per file, supporting components
-- **Curly Braces `{}`**: Indicate named exports, not default
-- **Parent/Child**: Conceptual - default is main, named are additional
-
----
-
-## 📮 `Props` Explained Step-by-Step
-
-### 🎯 **What Are Props?**
-
-Props (properties) are a way for **parent components** to send data to **child components**.
-
-### 🔄 **How Props Work:**
-
-#### **Step 1: Parent Component Sends Data**
-
-```jsx
-// Parent component (App.jsx)
-const App = () => {
-  const movieData = {
-    title: "Stranger Things",
-    rating: 9.2,
-    genre: "Sci-Fi",
-  };
-
-  return (
-    <div>
-      {/* ✅ Sending data to child component */}
-      <SeriesCard data={movieData} />
-  );
-};
-```
-
-#### **Step 2: Child Component Receives Data**
-
-```jsx
-// Child component (SeriesCard.jsx)
-export const SeriesCard = (props) => {
-  // ✅ props = { data: { title: "Stranger Things", rating: 9.2, genre: "Sci-Fi" } }
-  console.log(props); // Check what we received
-
-  // Extract data from props
-  const { img_url, name, rating } = props.data;
-
-  return <h2>{name}</h2>; // Display the data
-};
-```
-
----
-
-## 🧹 **Clean Destructuring** (Making Code Simpler)
-
-### ❌ **Old Way (Verbose)**
-
-```jsx
-const SeriesCard = (props) => {
-  // Step 1: Get props object
-  console.log(props); // { data: { title: "...", rating: 9.2 } }
-
-  // Step 2: Extract data from props.data
-  const { img_url, name } = props.data;
-
-  // Step 3: Use the data
-  return <h2>{name}</h2>;
-};
-```
-
-### ✅ **Clean Way (Direct Destructuring)**
-
-```jsx
-const SeriesCard = ({ data }) => {
-  // ✅ Direct destructuring: { data } extracts data from props
-  console.log(data); // { title: "...", rating: 9.2 }
-
-  // ✅ Extract all properties at once
-  const { img_url, name, rating, description, cast, genre, watch_url } = data;
-
-  return (
-    <li>
-      <img src={img_url} width="40%" height="40%" />
-      <h2>Name: {name}</h2>
-      <p>Summary: {description}</p>
-      <p>Cast: {cast}</p>
-      <p>Genre: {genre}</p>
-      <a href={watch_url} target="_blank">
-        <button>Watch Now</button>
-      </a>
-    </li>
-  );
-};
-```
-
-### 🔍 **Destructuring Breakdown:**
-
-| Code                    | Meaning                         |
-| ----------------------- | ------------------------------- |
-| `(props)`               | Receive entire props object     |
-| `({ data })`            | Extract only `data` from props  |
-| `const { name } = data` | Extract `name` from data object |
-
----
-
-## 👨‍👩‍👧 **Props + `children` Example**
-
-### 📤 **Parent Component:**
-
-```jsx
-<ProfileCard name="Alice" age={38} greeting={<strong>Hi Alice!</strong>}>
-  {/* ✅ Everything between tags becomes 'children' */}
-  <p>Hobbies: Reading, Hiking</p>
-  <button>Contact</button>
-</ProfileCard>
-```
-
-### 📥 **Child Component:**
-
-```jsx
-  // - name: "Alice"
-  // - greeting: <strong>Hi Alice!</strong>
-  // - children: <p>Hobbies...</p> + <button>Contact</button>
-
-  return (
-    <>
-      <h2>Name: {name}</h2> {/* Alice */}
-      <p>Age: {age}</p> {/* 38 */}
-      <p>{greeting}</p> {/* <strong>Hi Alice!</strong> */}
-      <div>{children}</div> {/* All content between tags */}
-    </>
-  );
-};
-```
-
-### 🧠 **Key Concept:**
-
-- **Regular Props**: `name`, `age`, `greeting` (passed as attributes)
-- **Children Props**: Content between opening and closing tags
-
----
-
-## 🧠 React Recap
-
-| Concept            | Description                                   |
-| ------------------ | --------------------------------------------- |
-| JSX Rendering      | Skips `false`, `null`, `undefined`, `NaN`     |
-| Fragment           | Use `<></>` or `<Fragment>` to group elements |
-| Conditional Render | Use ternary, variable, or function            |
-| Props              | Data from parent to child                     |
-| Destructuring      | Cleaner code with `({ prop })`                |
-| `props.children`   | Access nested JSX passed to component         |
-
-<br><br>
-
-# 🎨 `Inline Styling` in SeriesCard
-
-This component uses inline styling for certain UI elements.
-
-## 📌 Button Styling
-
-The Watch Now button uses an inline style object defined as:
-
-```jsx
-const btn_style = {
-  padding: "1.2rem 2.4rem",
-  border: "none",
-  fontSize: "1.6rem",
-  backgroundColor: "var(--btn-hover-bg-color)",
-  color: "var(--bg-color)",
-};
-```
-
-## This is applied to the button like so:
-
-```jsx
-<button style={btn_style}>Watch Now</button>
-```
-
-## 📌 Heading Styling
-
-A heading also uses inline styles:
-
-````jsx
-<h3 style={{ fontSize: "18px" }}>Rating: {rating}</h3>
-
-
-
-
-Dynamic: Can be modified based on props or state.
-
-## ⚠️ Limitations
-
-No support for pseudo-classes like :hover or media queries.
-
-Not ideal for large, consistent design systems.
-
-## 🖼️ Rendered Output Includes:
-
-A card with:
-
-- Thumbnail image (img_url)
-
-- Title (name)
-
-- Rating, Description, Cast, and Genre
-
-- External link button (Watch Now)
-
-<hr>
-<br>
-
-## 🎯 `Conditional Styling` with JSX – SeriesCard Component
-
-✅ Objective
-Apply different styles based on rating using template literals and a variable-based approach to keep JSX clean and readable.
-
-## 📦 Updated Code Snippet
-
-```jsx
-export const SeriesCard = ({ data }) => {
-  const { img_url, name, rating, description, cast, genre, watch_url } = data;
-
-  const btn_style = {
-    padding: "1.2rem 2.4rem",
-    border: "none",
-    fontSize: "1.6rem",
-    backgroundColor: "var(--btn-hover-bg-color)",
-    color: "var(--bg-color)",
-  };
-
-  // ✅ Conditional class name based on rating
-  const rating_condition = rating >= 8.5 ? "superhit" : "average";
-
-  return (
-    <li className="card">
-      <div>
-      </div>
-      <div className="card-content">
-        <h2>Name: {name}</h2>
-        <h3 style={{ fontSize: "18px" }}>
-          Rating:
-          <span className={`rating ${rating_condition}`}>{rating}</span>
-        </h3>
-        <p>Summary: {description}</p>
-        <p>Cast: {cast}</p>
-        <p>Genre: {genre}</p>
-        <a href={watch_url} target="_blank">
-          <button style={btn_style}>Watch Now</button>
-        </a>
-      </div>
-    </li>
-  );
-};
-````
-
----
-
-## ⚡ React useState Hook
-
-### 🎯 What is useState?
-
-`useState` is a React Hook that lets you add state to functional components. State is data that can change over time and cause your component to re-render.
-
-### 🚀 Basic Usage
-
-```jsx
-import { useState } from "react";
-
-function Counter() {
-  const [count, setCount] = useState(0); // Initial value is 0
-  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
+  color: orange;
 }
 ```
 
-### 🧠 How It Works
+#### 2. Use in Component
 
-- `useState(0)` returns an array: `[currentValue, updateFunction]`
-- `count` is the current value
-- `setCount` is the function to update the value
+```jsx
+import styles from "./Netflix.module.css";
 
-### 💡 Pro Tips
+const NetflixSeries = () => {
+  const name = "Solo Leveling";
+  const rating = 9.5;
+  const summary = `In a world where gates connect Earth...`;
+  const returnGenre = () => "Adventure, Action-Drama";
 
-- You can use any data type (number, string, array, object)
-- Calling the update function re-renders the component
+  return (
+    <div className={styles.card}>
+      <h2>{name}</h2>
+      <h3 className={rating >= 8.5 ? styles.superhit : styles.average}>
+        Rating: {rating}
+      </h3>
+      <p>Summary: {summary}</p>
+      <p>Genre: {returnGenre()}</p>
+    </div>
+  );
+};
+```
 
 ---
 
 ---
 
-## 🌟 Styled-Components & Advanced Conditional Styling
+## 🧩 13. Styled Components
 
-### 🎯 What are Styled-Components?
+### 🎯 What are Styled Components?
 
 Styled-components is a library for React that lets you write CSS directly in your JavaScript files using tagged template literals. It enables dynamic, component-scoped styles and supports conditional logic based on props.
 
-### 🚀 Basic Usage
+### 📦 Usage Example
 
 ```jsx
 import styled from "styled-components";
@@ -698,108 +503,114 @@ const Button = styled.button`
 `;
 
 // Usage in JSX
-<Button rating={rating}>Watch Now</Button>;
+<Button rating={9.2}>Watch Now</Button>;
 ```
 
-### 🧠 Conditional Styling with Props
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Styled Components Interview Questions</span>**
 
-- You can use props in styled-components to change styles dynamically.
-- Example: `background-color` changes based on the `rating` prop.
-
-### 💡 Pro Tips
-
-- Use styled-components for reusable, dynamic styles.
-- Combine with CSS Modules for local scoping and global themes.
-- You can style any HTML element or custom React component.
-
----
+- **What is styled-components and how does it differ from CSS Modules?**
+  - _Styled-components let you write CSS in JS and use props for dynamic styling; CSS Modules are static CSS files._
+- **How do you pass props to a styled component?**
+  - _Pass props as you would to any component; styled-components can use them in their template literals._
+- **What are the benefits of using styled-components?**
+  - _Scoped styles, dynamic styling, and no class name collisions._
 
 ---
 
-## 🌀 Tailwind CSS in React
+---
+
+## 🧩 14. Tailwind CSS in React
 
 ### 🎯 What is Tailwind CSS?
 
 Tailwind CSS is a utility-first CSS framework for rapidly building custom user interfaces. It provides low-level utility classes that let you style elements directly in your JSX.
 
-### 🚀 How to Use Tailwind in React
-
-- Install Tailwind and add `@import "tailwindcss";` to your main CSS file (e.g., `src/index.css`).
-- Use Tailwind utility classes in your JSX elements.
-
-### 📦 Example Usage
+### 📦 Usage Example
 
 ```jsx
 <div className="flex flex-col gap-6 p-6">
-  <h2>Name: {name}</h2>
-  <p className="text-3xl font-bold underline">Summary: {description}</p>
+  <h2 className="text-2xl font-bold text-blue-500">Hello</h2>
+  <p className="text-3xl font-bold underline">Summary: ...</p>
 </div>
 ```
 
-### 🧠 Key Features
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Tailwind CSS Interview Questions</span>**
 
-- Utility classes for layout, spacing, typography, colors, and more
-- Responsive design with breakpoints
-- Easily combine with other styling methods (CSS Modules, styled-components)
-
-### 💡 Pro Tips
-
-- Use Tailwind for rapid prototyping and consistent design
-- Classes can be combined for complex styles
-- Works well with React's component structure
+- **What is Tailwind CSS and how is it used in React?**
+  - _Tailwind is a utility-first CSS framework; use its classes directly in your JSX._
+- **What are the advantages of utility-first CSS frameworks?**
+  - _Faster prototyping, consistent design, and less custom CSS._
+- **How do you combine Tailwind with other styling methods?**
+  - _You can use Tailwind with CSS Modules or styled-components for advanced use cases._
 
 ---
 
 ---
 
-## ⚡ React Event Handling
+## 🧩 15. Event Handling in React
 
-### 🎯 What is Event Handling in React?
+### 🎯 What is Event Handling?
 
 Event handling in React lets you respond to user actions (like clicks, typing, etc.) using functions called event handlers. You attach these handlers to JSX elements using props like `onClick`, `onChange`, etc.
 
-### 🚀 Example: Button Click Event
+### 📦 Usage Example
 
 ```jsx
-export const EventHandling = () => {
-  const handleButtonClick = (beti) => {
-    alert(`Hey I am ${beti} OnClick Event`);
-  };
+const handleClick = () => alert('Button clicked!');
+<button onClick={handleClick}>Click</button>
 
-  return (
-    <>
-      {/* <button onClick={handleButtonClick}>Click Me!</button> */}
-      <button onClick={() => handleButtonClick("horney")}>Click Me!</button>
-    </>
-  );
-};
+// Passing arguments
+<button onClick={() => handleClick('Aayush')}>Click Me</button>
 ```
 
-### 🧠 Key Points
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Event Handling Interview Questions</span>**
 
-- Use camelCase for event props: `onClick`, `onChange`, etc.
-- Pass a function reference or an inline arrow function.
-- You can pass arguments to handlers using arrow functions.
-
-### 💡 Pro Tips
-
-- Use event handlers to update state, show alerts, or trigger any logic.
-- You can reuse handler functions for multiple elements.
+- **How do you handle events in React?**
+  - _Attach event handlers like `onClick` to JSX elements and define the handler as a function._
+- **How do you pass arguments to event handlers?**
+  - _Use an inline arrow function: `onClick={() => handleClick(arg)}`._
+- **What is the difference between native DOM events and React synthetic events?**
+  - _React wraps native events in SyntheticEvent for cross-browser compatibility and performance._
 
 ---
 
-## 🧠 Key Concepts (Overall)
+---
 
-- JSX skips rendering `false`, `null`, `undefined`, `NaN`
-- Fragments group elements: `<></>` or `<Fragment>`
-- Conditional rendering: ternary, variable, or function
-- Props: parent-to-child data
-- Destructuring props for cleaner code
-- `props.children` for nested JSX
-- Inline styling for quick, scoped styles
-- Template literals for dynamic classes/styles
-- CSS Modules for locally scoped styles
-- useState for state in functional components
-- styled-components for dynamic, prop-based styling
-- Tailwind CSS for utility-first styling
-- Event handling for interactive UI
+## 16. SyntheticBaseEvent
+
+React wraps browser events in a Synthetic Event for cross-browser consistency. Use event objects in handlers just like native events.
+
+```jsx
+<button
+  onClick={(e) => {
+    console.log(e.type); // 'click'
+    console.log(e.target); // the button
+  }}
+>
+  Click
+</button>
+```
+
+---
+
+## 🧩 16. Pro Tips
+
+- Destructure props for readability
+- Use conditional rendering for dynamic UIs
+- Use `.map()` for lists
+- Use utility CSS (Tailwind) for fast styling
+- Use event handlers for interactivity
+- Prefer functional components
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Pro Tips Interview Questions</span>**
+
+- **Why is it recommended to use functional components in React?**
+  - _They are simpler, easier to test, and work well with hooks._
+- **What are the benefits of using `.map()` for rendering lists?**
+  - _.map() is declarative, concise, and works well with React's virtual DOM diffing._
+- **How do you keep your React codebase maintainable and scalable?**
+  - _Use modular components, clear props, and consistent styling practices._
