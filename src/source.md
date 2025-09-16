@@ -275,6 +275,21 @@ export const Card = (props) => (
 - **How do you pass a function as a prop?**
   - _Pass the function reference as a prop, e.g., `<Child onClick={handleClick} />`._
 
+### ❓ Common Props Doubts
+
+- **Can I name props anything I want?**
+  - _Yes! The prop name is your choice. Just use the same name when passing and receiving it. For example, `<Card info={data} />` and `export const Card = ({ info }) => ...`._
+- **Is destructuring props required?**
+  - _No, it's optional. You can use `props.title` or destructure as `{ title }`. Destructuring just makes code cleaner when using many props._
+- **What are props, really?**
+  - _Props are just properties (values or functions) passed from a parent to a child component. They let components communicate and share data._
+- **Can I access the key prop inside a child component?**
+  - _No. The `key` prop is special—React uses it internally for list rendering. If you need the id or another value, pass it as a separate prop._
+- **Is the key prop required when using map?**
+  - _Yes, you should always provide a unique `key` when rendering lists with `.map()`. This helps React track items efficiently._
+- **What happens if I use a non-unique or changing key?**
+  - _React may mix up components, lose state, or cause bugs. Always use a stable, unique value for `key` (like an id)._
+
 ---
 
 ---
