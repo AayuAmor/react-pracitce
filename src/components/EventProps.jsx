@@ -12,8 +12,8 @@ export const EventProps = () => {
     return(
     <>
         <WelcomeUser
-            onClick = {()=> handleOnClick("Aayush")} 
-            onMouseEnter = {() => handleHover("Aayush")}
+            onButtonClick = {()=> handleOnClick("Aayush")} // parent props can be named whatever  
+            onHover = {() => handleHover("Aayush")}
         />
     </>
     );
@@ -27,8 +27,8 @@ const WelcomeUser = (props) => {
 
     return(
         <>
-            <button onClick= {() => props.onClick()}>Click Me!!</button>
-            <button onMouseEnter={() => props.onMouseEnter()}>Hover Me!!!</button>
+            <button onClick= {() => props.onButtonClick()}>Click Me!!</button>
+            <button onMouseEnter={() => props.onHover()}>Hover Me!!!</button>
             <button onClick={()=>handleNewClick()}>Click Me For More !!</button>
         </>
     )
