@@ -665,7 +665,7 @@ const WelcomeUser = (props) => {
 - **Can the child component modify the event handler function it receives?**
   - _No, but it can wrap or call it with different arguments. The function itself is controlled by the parent._
 
-## 🧩 18. Event Propagation
+## 🧩 17. Event Propagation
 
 ### � Capture vs Bubble Phase in Event Propagation
 
@@ -764,7 +764,7 @@ export const EventPropagation = () => {
 - **Does React use native DOM events or something else?**
   - _React uses SyntheticEvent, which wraps native events for cross-browser compatibility, but propagation works the same way._
 
-## 🧩 19. Pro Tips
+## 🧩 18. Pro Tips
 
 - Destructure props for readability
 - Use conditional rendering for dynamic UIs
