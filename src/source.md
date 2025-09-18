@@ -16,111 +16,110 @@
 7. [Props](#7-props)
 8. [React Destructuring Props](#8-react-destructuring-props)
 
-### CSS
+## 🧩 19. Event Propagation
 
-9. [Add CSS Styling](#9-add-css-styling)
-10. [Inline CSS in React](#10-inline-css-in-react)
-11. [Conditional Styling for Dynamic UIs](#11-conditional-styling-for-dynamic-uis)
-12. [CSS Modules](#12-css-modules)
-13. [Styled Components](#13-styled-components)
-14. [Tailwind CSS in React](#14-tailwind-css-in-react)
+### 🎯 What is Event Propagation?
 
-### Events
+Event propagation is the process by which events (like clicks) move through the DOM hierarchy. In React, just like in the browser, events bubble up from the innermost (child) element to the outermost (parent) element. You can control this behavior using the `stopPropagation()` method on the event object.
 
-15. [Event Handling in React](#15-event-handling-in-react)
-
-### Pro Tips
-
-16. [Pro Tips](#16-pro-tips)
-
----
-
-## 🧩 1. JSX
-
-### 🎯 What is JSX?
-
-JSX (JavaScript XML) lets you write HTML-like code inside JavaScript. It makes UI code more readable and expressive.
-
-### 🚀 Key Features
-
-- **HTML-like syntax**: Write elements as you would in HTML.
-- **JS expressions**: Use `{}` to embed JavaScript (variables, functions, etc.).
-- **Not rendered**: `null`, `NaN`, `false`, `undefined` (these are ignored in output)
-- **Rendered**: `0`, `""` (these are rendered)
-
-### 📦 Usage Example
+### 📦 Usage Example (Bubble Phase)
 
 ```jsx
-const userName = "Aayush";
-<h1>Hello, {userName}!</h1>;
+import "./EV.css";
+export const EventPropagation = () => {
+  const handleGrandParent = () => {
+    console.log("Grand Parent Clicked. !!");
+  };
+
+  const handleParentClick = (event) => {
+    console.log("Parent Clicked !!.");
+    event.stopPropagation(); // Prevents bubbling to grandparent
+  };
+
+  const handleChildrenClick = (event) => {
+    event.stopPropagation();
+    console.log(event);
+    console.log("Child Clicked");
+  };
+
+  return (
+    <section className="main-div">
+      <div className="g-div" onClick={handleGrandParent}>
+        <div className="p-div" onClick={handleParentClick}>
+          <button className="c-div" onClick={handleChildrenClick}>
+            Click Me !!
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
 ```
 
+#### How Bubble Phase Works
+
+- Clicking the button triggers `handleChildrenClick`, which calls `event.stopPropagation()`, so the event does not bubble up to parent or grandparent.
+- If you click the parent div, `handleParentClick` runs and also calls `event.stopPropagation()`, so the event does not reach the grandparent.
+- If you click the grandparent div directly, only `handleGrandParent` runs.
+
 <br>
-**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">$JSX Interview Questions$</span>**
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Event Propagation Interview Questions</span>**
 
-- **What is JSX and why is it used in React?**
-  - _JSX is a syntax extension for JavaScript that lets you write HTML-like code in React. It makes UI code more readable and allows embedding JavaScript expressions directly in markup._
-- **What happens if you return `null` or `false` in JSX?**
-  - _React ignores `null` and `false` in JSX, so nothing is rendered for those values._
-- **Can you use loops or if statements directly inside JSX?**
-  - _You cannot use statements like `for` or `if` directly in JSX, but you can use expressions (like ternary or `.map()`) inside curly braces._
+- **What is event propagation in React?**
+  - _Event propagation is the process where an event moves from the target element up through its ancestors (bubbling) or down (capturing). React uses bubbling by default._
+- **How do you stop an event from bubbling up in React?**
+  - _Call `event.stopPropagation()` inside your event handler._
+- **Why might you want to stop event propagation?**
+  - _To prevent parent elements from responding to an event that was already handled by a child._
+- **What parameter must you accept in your event handler to use stopPropagation()?**
+  - _You must accept the event object (commonly named `event` or `e`) as a parameter._
+- **Does React use native DOM events or something else?**
+  - _React uses SyntheticEvent, which wraps native events for cross-browser compatibility, but propagation works the same way._
 
 ---
 
----
+### 🌀 Capture vs Bubble Phase in Event Propagation
 
-## 🧩 2. Components in React
+In React (and the DOM), events can be handled in two phases:
 
-### 🎯 What are Components?
+- **Capture phase**: The event travels from the root down to the target element. In React, you handle this with `onClickCapture` (or any `on<Event>Capture`).
+- **Bubble phase**: The event travels from the target element up to the root. In React, you handle this with the regular `onClick` (or any `on<Event>`).
 
-Components are reusable, independent pieces of UI. They must start with an uppercase letter and return JSX.
-
-### 🚀 Key Features
-
-- **Reusable**: Use the same component in multiple places.
-- **Compositional**: Build complex UIs by combining components.
-- **Functional or Class**: Most modern React code uses functional components.
-
-### 📦 Usage Example
+#### 📦 Usage Example (Capture Phase)
 
 ```jsx
-function Welcome() {
-  return <h2>Welcome!</h2>;
-}
-export default Welcome;
-
-// Usage in another file
-import Welcome from "./Welcome";
-<Welcome />;
+return (
+  <section className="main-div">
+    <div className="g-div" onClickCapture={handleGrandParent}>
+      <div className="p-div" onClickCapture={handleParentClick}>
+        <button className="c-div" onClickCapture={handleChildrenClick}>
+          Click Me !!
+        </button>
+      </div>
+    </div>
+  </section>
+);
 ```
 
+#### How Capture Phase Works
+
+- With `onClickCapture`, the event is handled during the capture phase, so the outermost handler (grandparent) runs first, then parent, then child.
+- With regular `onClick`, the event is handled during the bubble phase, so the innermost handler (child) runs first, then parent, then grandparent.
+
 <br>
-**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Components Interview Questions</span>**
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Capture vs Bubble Phase Interview Questions</span>**
 
-- **What is a React component?**
-  - _A React component is a reusable, self-contained piece of UI that returns JSX and can accept props._
-- **Why must component names start with an uppercase letter?**
-  - _React treats lowercase tags as HTML elements. Custom components must start with uppercase so React knows to treat them as components._
-- **What is the difference between functional and class components?**
-  - _Functional components are functions that return JSX. Class components use ES6 classes and can have lifecycle methods and state (before hooks)._
-
----
-
----
-
-## 🧩 3. Dynamic Values
-
-### 🎯 What are Dynamic Values?
-
-You can embed JavaScript expressions inside JSX using curly braces `{}`. This allows you to display variables, call functions, or compute values on the fly.
-
-### 📦 Usage Example
-
-```jsx
-const age = 21;
-<p>Age: {age}</p>;
+- **What is the difference between the capture and bubble phase in event propagation?**
+  - _Capture phase goes from root to target; bubble phase goes from target to root. React supports both with `on<Event>Capture` and `on<Event>`._
+- **How do you handle events in the capture phase in React?**
+  - _Use `onClickCapture` (or similar) instead of `onClick`._
+- **Which handler runs first if both onClick and onClickCapture are present?**
+  - _The `onClickCapture` handler runs first (capture phase), then `onClick` (bubble phase)._
+  const age = 21;
+  <p>Age: {age}</p>;
 
 const getGreeting = () => "Hello!";
+
 <h2>{getGreeting()}</h2>;
 ```
 
@@ -666,7 +665,106 @@ const WelcomeUser = (props) => {
 - **Can the child component modify the event handler function it receives?**
   - _No, but it can wrap or call it with different arguments. The function itself is controlled by the parent._
 
-## 🧩 17. Pro Tips
+## 🧩 18. Event Propagation
+
+### � Capture vs Bubble Phase in Event Propagation
+
+In React (and the DOM), events can be handled in two phases:
+
+- **Capture phase**: The event travels from the root down to the target element. In React, you handle this with `onClickCapture` (or any `on<Event>Capture`).
+- **Bubble phase**: The event travels from the target element up to the root. In React, you handle this with the regular `onClick` (or any `on<Event>`).
+
+#### 📦 Usage Example (Capture Phase)
+
+```jsx
+return (
+  <section className="main-div">
+    <div className="g-div" onClickCapture={handleGrandParent}>
+      <div className="p-div" onClickCapture={handleParentClick}>
+        <button className="c-div" onClickCapture={handleChildrenClick}>
+          Click Me !!
+        </button>
+      </div>
+    </div>
+  </section>
+);
+```
+
+#### How it works
+
+- With `onClickCapture`, the event is handled during the capture phase, so the outermost handler (grandparent) runs first, then parent, then child.
+- With regular `onClick`, the event is handled during the bubble phase, so the innermost handler (child) runs first, then parent, then grandparent.
+
+#### Interview Q&A
+
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Capture vs Bubble Phase Interview Questions</span>**
+
+- **What is the difference between the capture and bubble phase in event propagation?**
+  - _Capture phase goes from root to target; bubble phase goes from target to root. React supports both with `on<Event>Capture` and `on<Event>`._
+- **How do you handle events in the capture phase in React?**
+  - _Use `onClickCapture` (or similar) instead of `onClick`._
+- **Which handler runs first if both onClick and onClickCapture are present?**
+  - _The `onClickCapture` handler runs first (capture phase), then `onClick` (bubble phase)._
+
+### �🎯 What is Event Propagation?
+
+Event propagation is the process by which events (like clicks) move through the DOM hierarchy. In React, just like in the browser, events bubble up from the innermost (child) element to the outermost (parent) element. You can control this behavior using the `stopPropagation()` method on the event object.
+
+### 📦 Usage Example
+
+```jsx
+import "./EV.css";
+export const EventPropagation = () => {
+  const handleGrandParent = () => {
+    console.log("Grand Parent Clicked. !!");
+  };
+
+  const handleParentClick = (event) => {
+    console.log("Parent Clicked !!.");
+    event.stopPropagation(); // Prevents bubbling to grandparent
+  };
+
+  const handleChildrenClick = (event) => {
+    event.stopPropagation();
+    console.log(event);
+    console.log("Child Clicked");
+  };
+
+  return (
+    <section className="main-div">
+      <div className="g-div" onClick={handleGrandParent}>
+        <div className="p-div" onClick={handleParentClick}>
+          <button className="c-div" onClick={handleChildrenClick}>
+            Click Me !!
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+```
+
+### 🔎 How it works
+
+- Clicking the button triggers `handleChildrenClick`, which calls `event.stopPropagation()`, so the event does not bubble up to parent or grandparent.
+- If you click the parent div, `handleParentClick` runs and also calls `event.stopPropagation()`, so the event does not reach the grandparent.
+- If you click the grandparent div directly, only `handleGrandParent` runs.
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Event Propagation Interview Questions</span>**
+
+- **What is event propagation in React?**
+  - _Event propagation is the process where an event moves from the target element up through its ancestors (bubbling) or down (capturing). React uses bubbling by default._
+- **How do you stop an event from bubbling up in React?**
+  - _Call `event.stopPropagation()` inside your event handler._
+- **Why might you want to stop event propagation?**
+  - _To prevent parent elements from responding to an event that was already handled by a child._
+- **What parameter must you accept in your event handler to use stopPropagation()?**
+  - _You must accept the event object (commonly named `event` or `e`) as a parameter._
+- **Does React use native DOM events or something else?**
+  - _React uses SyntheticEvent, which wraps native events for cross-browser compatibility, but propagation works the same way._
+
+## 🧩 19. Pro Tips
 
 - Destructure props for readability
 - Use conditional rendering for dynamic UIs

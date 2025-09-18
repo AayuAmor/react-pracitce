@@ -2,6 +2,7 @@ import { NetflixSeries } from "./components/NetflixSeries";
 import "./components/Netflix.module.css";
 import { EventHandling } from "./components/Eventhandling";
 import { EventProps } from "./components/EventProps";
+import {EventPropagation} from "./components/EventPropagation";
 
 export const App = () => {
   return( <section className="container">
@@ -9,7 +10,8 @@ export const App = () => {
 
     <NetflixSeries />; */}
     {/* <EventHandling/> */}
-    <EventProps />
+    {/* <EventProps /> */}
+    <EventPropagation/>
      </section>
     );
 
