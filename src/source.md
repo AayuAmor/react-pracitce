@@ -16,110 +16,116 @@
 7. [Props](#7-props)
 8. [React Destructuring Props](#8-react-destructuring-props)
 
-## 🧩 19. Event Propagation
+### Styling
 
-### 🎯 What is Event Propagation?
+9. [Add CSS Styling](#9-add-css-styling)
+10. [Inline CSS in React](#10-inline-css-in-react)
+11. [Conditional Styling for Dynamic UIs](#11-conditional-styling-for-dynamic-uis)
+12. [CSS Modules](#12-css-modules)
+13. [Styled Components](#13-styled-components)
+14. [Tailwind CSS in React](#14-tailwind-css-in-react)
 
-Event propagation is the process by which events (like clicks) move through the DOM hierarchy. In React, just like in the browser, events bubble up from the innermost (child) element to the outermost (parent) element. You can control this behavior using the `stopPropagation()` method on the event object.
+### Event Handling
 
-### 📦 Usage Example (Bubble Phase)
+15. [Event Handling in React](#15-event-handling-in-react)
+16. [Event Handling as Props](#16-event-handling-as-props)
+17. [Event Propagation](#17-event-propagation)
 
-```jsx
-import "./EV.css";
-export const EventPropagation = () => {
-  const handleGrandParent = () => {
-    console.log("Grand Parent Clicked. !!");
-  };
+### State
 
-  const handleParentClick = (event) => {
-    console.log("Parent Clicked !!.");
-    event.stopPropagation(); // Prevents bubbling to grandparent
-  };
+18. [States](#18-states)
 
-  const handleChildrenClick = (event) => {
-    event.stopPropagation();
-    console.log(event);
-    console.log("Child Clicked");
-  };
+### Best Practices
 
-  return (
-    <section className="main-div">
-      <div className="g-div" onClick={handleGrandParent}>
-        <div className="p-div" onClick={handleParentClick}>
-          <button className="c-div" onClick={handleChildrenClick}>
-            Click Me !!
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-};
-```
+19. [Pro Tips](#19-pro-tips)
 
-#### How Bubble Phase Works
+## 🧩 1. JSX
 
-- Clicking the button triggers `handleChildrenClick`, which calls `event.stopPropagation()`, so the event does not bubble up to parent or grandparent.
-- If you click the parent div, `handleParentClick` runs and also calls `event.stopPropagation()`, so the event does not reach the grandparent.
-- If you click the grandparent div directly, only `handleGrandParent` runs.
+### 🎯 What is JSX?
 
-<br>
-**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Event Propagation Interview Questions</span>**
+JSX (JavaScript XML) is a syntax extension for JavaScript, recommended by React, that looks similar to XML or HTML. It allows you to write markup directly in your JavaScript files, making it easier to create and visualize your React component structures.
 
-- **What is event propagation in React?**
-  - _Event propagation is the process where an event moves from the target element up through its ancestors (bubbling) or down (capturing). React uses bubbling by default._
-- **How do you stop an event from bubbling up in React?**
-  - _Call `event.stopPropagation()` inside your event handler._
-- **Why might you want to stop event propagation?**
-  - _To prevent parent elements from responding to an event that was already handled by a child._
-- **What parameter must you accept in your event handler to use stopPropagation()?**
-  - _You must accept the event object (commonly named `event` or `e`) as a parameter._
-- **Does React use native DOM events or something else?**
-  - _React uses SyntheticEvent, which wraps native events for cross-browser compatibility, but propagation works the same way._
-
----
-
-### 🌀 Capture vs Bubble Phase in Event Propagation
-
-In React (and the DOM), events can be handled in two phases:
-
-- **Capture phase**: The event travels from the root down to the target element. In React, you handle this with `onClickCapture` (or any `on<Event>Capture`).
-- **Bubble phase**: The event travels from the target element up to the root. In React, you handle this with the regular `onClick` (or any `on<Event>`).
-
-#### 📦 Usage Example (Capture Phase)
+### 📦 Usage Example
 
 ```jsx
+const element = <h1>Hello, world!</h1>;
+
+// In a component's return
 return (
-  <section className="main-div">
-    <div className="g-div" onClickCapture={handleGrandParent}>
-      <div className="p-div" onClickCapture={handleParentClick}>
-        <button className="c-div" onClickCapture={handleChildrenClick}>
-          Click Me !!
-        </button>
-      </div>
-    </div>
-  </section>
+  <div>
+    <h1>{title}</h1>
+    <p>{content}</p>
+  </div>
 );
 ```
 
-#### How Capture Phase Works
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">JSX Interview Questions</span>**
 
-- With `onClickCapture`, the event is handled during the capture phase, so the outermost handler (grandparent) runs first, then parent, then child.
-- With regular `onClick`, the event is handled during the bubble phase, so the innermost handler (child) runs first, then parent, then grandparent.
+- **What is JSX?**
+  - _JSX is a syntax extension for JavaScript, recommended by React, that looks similar to XML or HTML._
+- **Why do we use JSX in React?**
+  - _JSX makes it easier to write and visualize the structure of your UI components._
+- **Is JSX mandatory for React?**
+  - _No, but it is highly recommended as it simplifies the development process._
+- **Can you use JavaScript expressions inside JSX?**
+  - _Yes, you can use curly braces `{}` to embed JavaScript expressions inside JSX._
+- **What is the difference between a React element and a React component?**
+  - _A React element is a plain object describing a component instance; a React component is a function or class that optionally accepts inputs (props) and returns a React element._
+
+---
+
+## 🧩 2. Components in React
+
+### 🎯 What are Components?
+
+Components are the building blocks of a React application. A component is a JavaScript function or class that optionally accepts inputs (called "props") and returns a React element that describes how a section of the UI should appear.
+
+### 📦 Usage Example
+
+```jsx
+// Functional Component
+export const Welcome = (props) => {
+  return <h1>Hello, {props.name}!</h1>;
+};
+
+// Class Component
+export class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}!</h1>;
+  }
+}
+```
 
 <br>
-**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Capture vs Bubble Phase Interview Questions</span>**
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Components Interview Questions</span>**
 
-- **What is the difference between the capture and bubble phase in event propagation?**
-  - _Capture phase goes from root to target; bubble phase goes from target to root. React supports both with `on<Event>Capture` and `on<Event>`._
-- **How do you handle events in the capture phase in React?**
-  - _Use `onClickCapture` (or similar) instead of `onClick`._
-- **Which handler runs first if both onClick and onClickCapture are present?**
-  - _The `onClickCapture` handler runs first (capture phase), then `onClick` (bubble phase)._
-  const age = 21;
-  <p>Age: {age}</p>;
+- **What is a component in React?**
+  - _A component is a building block of a React application, representing a part of the UI._
+- **How do you create a component in React?**
+  - _You can create a component as a function or a class that returns a React element._
+- **What is the difference between a functional component and a class component?**
+  - _Functional components are simpler and are just JavaScript functions. Class components are ES6 classes that extend React.Component and have additional features like local state and lifecycle methods._
+- **Can a component return multiple elements?**
+  - _Yes, a component can return an array of elements or use React fragments to return multiple elements._
+- **What are props in React?**
+  - _Props (short for properties) are read-only inputs passed from a parent component to a child component._
+
+---
+
+## 🧩 3. Dynamic Values
+
+### 🎯 What are Dynamic Values?
+
+Dynamic values in React are JavaScript expressions or variables that can change over time and are used to make your components interactive and responsive to user input or other events.
+
+### 📦 Usage Example
+
+```jsx
+const age = 21;
+<p>Age: {age}</p>;
 
 const getGreeting = () => "Hello!";
-
 <h2>{getGreeting()}</h2>;
 ```
 
@@ -764,7 +770,61 @@ export const EventPropagation = () => {
 - **Does React use native DOM events or something else?**
   - _React uses SyntheticEvent, which wraps native events for cross-browser compatibility, but propagation works the same way._
 
-## 🧩 18. Pro Tips
+## 🧩 18. States
+
+### 🎯 What are States in React?
+
+State is a built-in React object used to contain data or information about the component. State changes trigger re-renders, allowing your UI to update dynamically in response to user actions or other events.
+
+### 📦 Usage Example (useState)
+
+```jsx
+import { useState } from "react";
+
+export const State = () => {
+  const [value, setValue] = useState(0);
+
+  const handleClickIncrement = () => {
+    setValue((prev) => prev + 1);
+    // OR: setValue(value + 1);
+  };
+
+  return (
+    <section className="main-div">
+      <h1>{value}</h1>
+      <button onClick={handleClickIncrement}>Click Me!!!</button>
+    </section>
+  );
+};
+```
+
+### ⚡ Why can't you use `value += 1` with state?
+
+- React state variables (like `value` from `useState`) should never be mutated directly.
+- The `+=` operator mutates the variable in place, but React state must be treated as immutable.
+- Direct mutation (e.g., `value += 1`) will not trigger a re-render and can cause bugs.
+- Always use the updater function (`setValue`) to create a new value.
+
+#### Correct ways to update state:
+
+- `setValue(value + 1)` — works, but can be problematic if updates are batched.
+- `setValue(prev => prev + 1)` — best practice, especially if the new state depends on the previous state.
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">States Interview Questions</span>**
+
+- **What is state in React?**
+  - _State is a built-in object that stores property values that belong to a component. When state changes, the component re-renders._
+- **How do you update state in a functional component?**
+  - _Use the setter function returned by `useState`, e.g., `setValue(newValue)`._
+- **Why can't you use `value += 1` to update state?**
+  - _Because it mutates the state directly, which React does not allow. Always use the setter function to update state._
+- **What is the difference between `setValue(value + 1)` and `setValue(prev => prev + 1)`?**
+  - _The first uses the current value, which may be stale if updates are batched. The second always uses the latest state, making it safer for consecutive updates._
+- **What happens if you mutate state directly in React?**
+  - _React will not detect the change, so the component will not re-render as expected._
+
+## 🧩 19. Pro Tips
 
 - Destructure props for readability
 - Use conditional rendering for dynamic UIs
@@ -782,3 +842,32 @@ export const EventPropagation = () => {
   - _.map() is declarative, concise, and works well with React's virtual DOM diffing._
 - **How do you keep your React codebase maintainable and scalable?**
   - _Use modular components, clear props, and consistent styling practices._
+
+---
+
+### 🏆 Updated Pro Tips (Advanced)
+
+- Destructure props for readability and easier access
+- Use conditional rendering for dynamic UIs
+- Use `.map()` for rendering lists with unique `key` props
+- Use utility CSS (Tailwind), CSS Modules, or Styled Components for styling
+- Use event handlers for interactivity and pass them as props when needed
+- Understand event propagation (bubble and capture phases) and use `stopPropagation()` when required
+- Prefer functional components for simplicity and hooks support
+- Design props clearly in the parent for easier use in the child
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Pro Tips Interview Questions (Advanced)</span>**
+
+- **Why is it recommended to use functional components in React?**
+  - _They are simpler, easier to test, and work well with hooks._
+- **What are the benefits of using `.map()` for rendering lists?**
+  - _.map() is declarative, concise, and works well with React's virtual DOM diffing. Always use a unique `key` prop for each item._
+- **How do you keep your React codebase maintainable and scalable?**
+  - _Use modular components, clear props, and consistent styling practices._
+- **Why is understanding event propagation important in React?**
+  - _It helps you control how events flow through nested components, letting you prevent unwanted side effects with `stopPropagation()` or by using capture phase handlers._
+- **How can you make child components easier to use and maintain?**
+  - _Design props in the parent to match the child's needs, and use destructuring for clarity in the child._
+- **When should you use event handlers as props?**
+  - _When the parent needs to control or respond to events happening in the child component._
