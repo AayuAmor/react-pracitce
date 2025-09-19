@@ -14,8 +14,18 @@ export const App = () => {
       {/* <EventProps /> */}
       {/* <EventPropagation/> */}
       <State/>
+      <SiblingComponent/>
 
      </section>
     );
 
+};
+
+export function SiblingComponent(){
+    console.log("Sibling Component Re-rendered.")
+    return(
+        <div className="main-div">
+            <h2> Sibling Component</h2>
+        </div>
+    )
 };
