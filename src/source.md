@@ -882,6 +882,71 @@ function Child({ count }) {
 
 ---
 
+
+
+## 🧩 How to Change an Object Variable to a State Variable in React
+
+### 🎯 Why Use State for Objects or Arrays?
+
+In React, if you want your UI to update when an object or array changes, you must store it in state using `useState`. Regular variables do not trigger re-renders when changed.
+
+### 📦 Usage Example
+
+Suppose you have a list of users as a regular variable:
+
+```jsx
+// ❌ This will NOT trigger re-render on change
+const users = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+];
+```
+
+To make it reactive, use `useState`:
+
+```jsx
+import { useState } from "react";
+
+export const DriveState = () => {
+  const [users, setUsers] = useState([
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 30 },
+    { name: "Charlie", age: 35 },
+    { name: "Angle", age: 40 },
+  ]);
+
+  return (
+    <div className="main-div">
+      <h1>User List</h1>
+      <ul>
+        {users.map((user, index) => (
+          <li key={index}>
+            {user.name} - {user.age} Years Old
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+- Now, if you update the `users` array using `setUsers`, the component will re-render and show the new data.
+
+### 💡 Interview Q&A
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Object/Array State Interview Questions</span>**
+
+- **Why can't you use a regular variable for objects/arrays if you want the UI to update?**
+  - _Because React does not track changes to regular variables. Only state changes trigger re-renders._
+- **How do you make an object or array reactive in React?**
+  - _Store it in state using `useState`, and always use the setter function to update it._
+- **How do you update an array or object in state?**
+  - _Create a new array/object (using spread or other methods) and pass it to the setter function. Never mutate state directly._
+- **What happens if you mutate an object or array in state directly?**
+  - _React may not detect the change, so the UI might not update as expected._
+
+
 ### 🏆 Updated Pro Tips (Advanced)
 
 - Destructure props for readability and easier access

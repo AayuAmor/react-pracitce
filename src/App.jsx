@@ -4,6 +4,7 @@ import { EventHandling } from "./components/Eventhandling";
 import { EventProps } from "./components/EventProps";
 import {EventPropagation} from "./components/EventPropagation";
 import { State } from "./components/hooks/States";
+import { DriveState } from "./components/hooks/DriveState";
 
 export const App = () => {
   return( <section className="container">
@@ -13,19 +14,11 @@ export const App = () => {
       {/* <EventHandling/> */}
       {/* <EventProps /> */}
       {/* <EventPropagation/> */}
-      <State/>
-      <SiblingComponent/>
+      {/* <State/>
+      <SiblingComponent/> */}
+      <DriveState/>
 
      </section>
     );
 
-};
-
-export function SiblingComponent(){
-    console.log("Sibling Component Re-rendered.")
-    return(
-        <div className="main-div">
-            <h2> Sibling Component</h2>
-        </div>
-    )
 };
