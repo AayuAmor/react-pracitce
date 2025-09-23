@@ -863,7 +863,7 @@ function Child({ count }) {
 
 #### 🧠 What is Reconciliation?
 
-- Reconciliation is React's process of updating the DOM efficiently by comparing the new virtual DOM with the previous one and making only the necessary changes.
+- Reconciliation is React's process of updating the DOM efficiently by comparing the new and old virtual DOM trees and making only the necessary changes.
 - React uses keys to identify elements in lists and optimize updates.
 
 <br>
@@ -1003,3 +1003,60 @@ export const DriveState = () => {
   - _A count of items in an array, an average, a filtered list, etc._
 - **When might you store a derived value in state?**
   - _Only if calculating it is very expensive and you want to cache it, or if you need to override it manually._
+
+## 20. Lifting State Up
+
+### 🎯 What is Lifting State Up?
+
+Lifting state up is a React pattern where you move shared state to the closest common ancestor of components that need to access or modify it. This allows sibling or nested components to communicate and stay in sync by sharing state through props.
+
+### 📦 Usage Example
+
+```jsx
+import { useState } from "react";
+
+export const LiftingState = () => {
+  const [inputValue, setInputValue] = useState("");
+  return (
+    <>
+      <InputComponent inputValue={inputValue} setInputValue={setInputValue} />
+      <DisplayComponent inputValue={inputValue} />
+    </>
+  );
+};
+
+const InputComponent = ({ inputValue, setInputValue }) => {
+  return (
+    <input
+      type="text"
+      placeholder="Enter Your Name"
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
+    />
+  );
+};
+
+const DisplayComponent = (props) => {
+  return <p>The current InputValue is: {props.inputValue}</p>;
+};
+```
+
+- The state `inputValue` is managed in the parent (`LiftingState`).
+- `InputComponent` can update the value, and `DisplayComponent` can read it, both via props.
+- This keeps the data flow predictable and components in sync.
+
+### 💡 Interview Q&A
+
+<br>
+**<span style="color: #FFD600; font-size: 1.5em; font-weight: 900;">Lifting State Up Interview Questions</span>**
+
+- **What does "lifting state up" mean in React?**
+  - _Moving shared state to the closest common ancestor so multiple components can access and update it via props._
+- **Why would you lift state up?**
+  - _To allow sibling or nested components to share and synchronize data._
+- **How do child components update state when it is lifted up?**
+  - _The parent passes down a setter function (like `setInputValue`) as a prop, which the child calls to update the state._
+- **What are the benefits of lifting state up?**
+  - _Keeps data flow clear and predictable, avoids duplication, and enables component communication._
+- **What is an alternative to lifting state up for deeply nested components?**
+  - _Using React Context to avoid prop drilling when many levels of components need access to the same state._
