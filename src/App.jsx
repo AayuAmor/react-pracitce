@@ -1,11 +1,13 @@
 import "./components/Netflix.module.css";
-import { LiftingState } from "./components/LiftingState";
+import { ToogleSwitch } from "./components/Projects/ToogleSwitch/ToogleSwitch";
+// import { LiftingState } from "./components/LiftingState";
 
 export const App = () => {
   return( 
     <section className="container">
 
-      <LiftingState/>
+      {/* <LiftingState/> */}
+      <ToogleSwitch/>
 
     </section>
   );
