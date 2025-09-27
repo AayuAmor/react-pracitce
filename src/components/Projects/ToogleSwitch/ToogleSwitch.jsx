@@ -16,7 +16,7 @@ export const ToogleSwitch = () => {
     return(
         <>
         <h1>
-            Toogle Switch<BsToggles className="display: inline-block"/>
+            Toogle Switch <BsToggles className="display: inline-block"/>
         </h1>
         <div
         className="toggle-switch"
