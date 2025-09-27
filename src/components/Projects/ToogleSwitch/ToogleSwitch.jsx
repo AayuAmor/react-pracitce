@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./ToogleSwitch.css"
+import "./ToogleSwitch.css";
+import { BsToggles } from "react-icons/bs";
 
 export const ToogleSwitch = () => {
 
@@ -14,6 +15,9 @@ export const ToogleSwitch = () => {
 
     return(
         <>
+        <h1>
+            Toogle Switch<BsToggles className="display: inline-block"/>
+        </h1>
         <div
         className="toggle-switch"
         style={toggleBGColor}
